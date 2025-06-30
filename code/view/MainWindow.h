@@ -5,7 +5,7 @@
 #include "GameViewModel.h"
 #include "GameView.h"
 
-#include "widgets/GameBoard.h"
+#include"widgets/GameBoard.h"
 
 class MainWindow :public F1_Window
 {
