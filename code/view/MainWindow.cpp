@@ -1,3 +1,5 @@
+#include "../common/property_ids.h"
+
 #include"MainWindow.h"
 
 #define BOARD_X (5)

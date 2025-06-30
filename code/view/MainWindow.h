@@ -1,9 +1,7 @@
 #pragma once
 
-#include <FL/Fl.H>
-#include <FL/Fl_Window.H>
-#include "GameViewModel.h"
-#include "GameView.h"
+
+#include "../common/frame.h"
 
 #include"widgets/GameBoard.h"
 
