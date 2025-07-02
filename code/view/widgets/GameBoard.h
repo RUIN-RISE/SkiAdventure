@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../common/air_map.h"
+// #include "../../common/air_map.h"
 //折线点
 struct Fl_Point{
     int x;

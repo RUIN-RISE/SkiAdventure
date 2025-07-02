@@ -2,10 +2,10 @@
 
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
-#include "GameViewModel.h"
-#include "GameView.h"
+// #include "GameViewModel.h"
+// #include "GameView.h"
 
-#include"widgets/GameBoard.h"
+#include "widgets/GameBoard.h"
 
 class MainWindow :public F1_Window
 {

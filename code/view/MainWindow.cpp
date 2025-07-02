@@ -1,4 +1,4 @@
-#include"MainWindow.h"
+#include "MainWindow.h"
 
 #define BOARD_X (5)
 #define BOARD_Y (5)

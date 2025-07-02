@@ -11,6 +11,9 @@
 #include <ctime>
 #include <cmath>
 #include <utility>
+#include <iostream>
+
+const double deltaTime = 1.0/60 ;
 
 //FLTK
 #include <FL/Fl.H>
