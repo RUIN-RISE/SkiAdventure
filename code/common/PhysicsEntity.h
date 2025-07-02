@@ -1,0 +1,42 @@
+#include "Vector.h"
+
+class PhysicsEntity {
+public:
+    // Accelaration is set with a default value of (0, -10) to simulate gravity
+    PhysicsEntity(
+        Vector _position = Vector(0,0),
+        Vector _velocity = Vector(0,0),
+        Vector _acceleration = Vector(0,-10),
+        bool _onCurve = false
+    );
+    
+    //Add acceleration to the current acceleration
+    void applyAcceleration(Vector acc);
+
+    void setAcceleration(Vector acc);
+
+    void setVelocity(Vector vel);
+    
+    void setPosition(Vector pos);
+    
+    void setOnCurve(bool onCurve);
+
+    Vector getPosition() const;
+    
+    Vector getVelocity() const;
+
+    Vector getAcceleration() const;
+
+    bool isOnCurve() const;
+    
+    // Update position/velocity based on velocity/acceleration
+    void update(double deltaTime);
+
+private:
+    Vector position;
+    Vector velocity;
+    Vector acceleration;
+    
+    // Point is on(at) the curve if onCurve is true
+    bool onCurve;
+};
