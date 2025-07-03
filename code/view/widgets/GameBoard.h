@@ -11,11 +11,19 @@ class Gameboard : public Fl_Group{
     Gameboard(int x,int y,int w,int h,const char *l = nullptr);
     ~Gameboard() noexcept;
 
-    void setmap(const std::vector<Vector>& points) noexcept
+    void set_curve(Curve* curve) noexcept
     {
-        terrain_line = points;
+        game_curve = curve;
     }
-    bool loadTexture(const std::string &filename);
+
+        void set_character_position(const Vector& pos) noexcept
+    {
+        character_position = pos;
+    }
+
+    Vector logic_to_screen(const Vector& logic_pos,double view_left, double view_top) const ;
+    std::vector<Vector> get_terrain();
+
     void set_character(const std::unique_ptr<Fl_PNG_Image>* p) noexcept
     {
         character = p;
@@ -31,10 +39,12 @@ class Gameboard : public Fl_Group{
 
     private:
     Fl_Box m_character;
-
     private:
     std::vector<Vector> terrain_line;
-
     const std::unique_ptr<Fl_PNG_Image>* character;
+    Vector character_position;
+    int map_width,map_height;
+    Curve* game_curve = nullptr;
+
     const std::unique_ptr<Fl_PNG_Image>* snow;
 };
