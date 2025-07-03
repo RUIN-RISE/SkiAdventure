@@ -1,4 +1,3 @@
-#include <chrono>
 #include "Timer.h"
 
 Timer::Timer() {

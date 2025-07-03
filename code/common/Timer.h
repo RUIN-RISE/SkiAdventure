@@ -1,5 +1,3 @@
-#include <chrono>
-
 class Timer {
 public:
     // Constructs a Timer and call reset()
