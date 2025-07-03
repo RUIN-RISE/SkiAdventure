@@ -36,6 +36,7 @@ class Gameboard : public Fl_Group{
     }
 
     protected:
+    // public: // to debug
     void draw() override;
 
     private:

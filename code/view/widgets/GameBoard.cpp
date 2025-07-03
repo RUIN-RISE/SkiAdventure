@@ -1,13 +1,15 @@
 #include "GameBoard.h"
 
-#define BOX_PLANE_X  (x + 10)
-#define BOX_PLANE_Y  (y + 10)
-#define BOX_PLANE_W  (90)
-#define BOX_PLANE_H  (90)
+// #define BOX_PLANE_X  (x + 10)
+// #define BOX_PLANE_Y  (y + 10)
+// #define BOX_PLANE_W  (90)
+// #define BOX_PLANE_H  (90)
 
 Gameboard::Gameboard(int x, int y, int w, int h, const char *l): 
-    BaseClass(x,w,y,h,l),
-	m_character(BOX_PLANE_X, BOX_PLANE_Y, BOX_PLANE_W, BOX_PLANE_H),
+    // BaseClass(x,w,y,h,l),
+    BaseClass(x,y,w,h,l),
+	// m_character(BOX_PLANE_X, BOX_PLANE_Y, BOX_PLANE_W, BOX_PLANE_H),
+    m_character(x,y,25,25),
     map_width(w),
     map_height(h)
 {
@@ -71,8 +73,8 @@ void Gameboard::draw()
 {
     //To debug
     std::cerr << "Drawing" << std::endl ;
-    fl_rectf(x(), y(), w(), h(), FL_RED);
-    return ;
+    // fl_rectf(x(), y(), w(), h(), FL_RED);
+    // return ;
 
     const double screen_width = w();
     const double screen_height = h();
@@ -127,4 +129,5 @@ void Gameboard::draw()
         int charY = centerY - (*character)->w()/2;
         (*character)->draw(charX,charY);
     }
+    // BaseClass::draw_children();
 }

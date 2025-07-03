@@ -19,9 +19,9 @@ void PropertyTrigger::remove_notification(uintptr_t cookie) noexcept {
 }
 
 void PropertyTrigger::fire(uint32_t id) {
-	std::cerr << "fire" << std::endl;
+	// std::cerr << "fire" << std::endl;
 	for (auto& fn : m_vec_nf) {
 		if (fn != nullptr)
-			fn(id),std::cerr<<"fn"<<std::endl;
+			fn(id);
 	}
 }
