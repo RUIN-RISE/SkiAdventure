@@ -1,7 +1,7 @@
 #include "app/App.h"
 
 int main(){
-	std::unique_ptr<AirApp> app(std::make_unique<AirApp>());
+	std::unique_ptr<App> app(std::make_unique<App>());
 
 	if (!app->initialize()) {
 		fl_alert("Initialization failed!");
