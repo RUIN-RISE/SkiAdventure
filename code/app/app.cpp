@@ -1,6 +1,6 @@
 #include "App.h"
 
-App::App() : m_main_wnd(1200, 700, "Ski Adventure") {}
+App::App() : m_main_wnd(700,1200 , "Ski Adventure") {}
 
 bool App::initialize(){
 	if (!m_spirit_viewmodel.initialize())
@@ -9,7 +9,7 @@ bool App::initialize(){
 
 	//properties
 	m_main_wnd.get_board().set_character(m_spirit_viewmodel.get_player());
-	// m_main_wnd.get_board().set_snow(m_spirit_viewmodel.get_snow());
+	m_main_wnd.get_board().set_snow(m_spirit_viewmodel.get_snow());
 
 	//commands
 	m_main_wnd.set_next_step_command(m_game_viewmodel.get_next_step_command());

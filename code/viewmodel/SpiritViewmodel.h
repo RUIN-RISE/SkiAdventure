@@ -20,12 +20,17 @@ public:
 	{
 		return &m_player;
 	}
+	const std::unique_ptr<Fl_PNG_Image>* get_snow() const noexcept
+	{
+		return &m_snow;
+	}
 //methods
 	bool initialize();
 
 private:
 //properties
 	std::unique_ptr<Fl_PNG_Image> m_player;
+	std::unique_ptr<Fl_PNG_Image> m_snow;
 };
 
 #endif

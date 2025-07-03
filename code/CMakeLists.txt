@@ -23,9 +23,9 @@ target_link_libraries(SkiAdventure PRIVATE fltk fltk_images)
 set(assets_path_list "${CMAKE_CURRENT_BINARY_DIR}/Debug/assets"
 	"${CMAKE_CURRENT_BINARY_DIR}/Release/assets")
 file(MAKE_DIRECTORY ${assets_path_list})
-# foreach(assets_path ${assets_path_list})
-# 	file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/assets/bullet.png"
-# 		"${CMAKE_CURRENT_SOURCE_DIR}/assets/plane_red.png"
+foreach(assets_path ${assets_path_list})
+	file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/assets/player.png"
+		"${CMAKE_CURRENT_SOURCE_DIR}/assets/snow.png"
 # 		"${CMAKE_CURRENT_SOURCE_DIR}/assets/plane_blue.png"
-# 		DESTINATION "${assets_path}")
-# endforeach()
+		DESTINATION "${assets_path}")
+endforeach()
