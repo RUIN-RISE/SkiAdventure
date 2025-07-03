@@ -8,7 +8,7 @@
 class GameViewModel : public PropertyTrigger
 {
 public:
-	GameViewModel();
+	GameViewModel() = default;
 	GameViewModel(const GameViewModel&) = delete;
 	~GameViewModel() noexcept
 	{
