@@ -1,5 +1,4 @@
 #include "Curve.h"
-#include <cmath>
 
 double Curve::evaluate(double x) const {
     return -x + std::sin(x);
