@@ -1,6 +1,6 @@
 #include "App.h"
 
-App::App() : m_main_wnd(1200, 700, "Ski Adventure") {}
+App::App() : m_main_wnd(700,1200 , "Ski Adventure") {}
 
 bool App::initialize(){
 	if (!m_spirit_viewmodel.initialize())
