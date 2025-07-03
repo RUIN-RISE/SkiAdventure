@@ -1,3 +1,6 @@
+#ifndef __TIMER_H__
+#define __TIMER_H__
+
 class Timer {
 public:
     // Constructs a Timer and call reset()
@@ -12,3 +15,5 @@ public:
 private:
     std::chrono::steady_clock::time_point start_time_;
 };
+
+#endif

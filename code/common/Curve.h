@@ -1,3 +1,6 @@
+#ifndef __CURVE_H__
+#define __CURVE_H__
+
 // y = -x + sin(x)
 class Curve {
 public:
@@ -12,3 +15,5 @@ public:
     // <y(x), y'(x)>
     std::pair<double, double> evaluateAndDerivative(double x) const;
 };
+
+#endif

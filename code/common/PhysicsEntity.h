@@ -1,3 +1,6 @@
+#ifndef __PHYSICS_ENTITY_H__
+#define __PHYSICS_ENTITY_H__
+
 #include "Vector.h"
 
 class PhysicsEntity {
@@ -40,3 +43,5 @@ private:
     // Point is on(at) the curve if onCurve is true
     bool onCurve;
 };
+
+#endif

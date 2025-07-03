@@ -1,3 +1,6 @@
+#ifndef __APP_H__
+#define __APP_H__
+
 #include "../viewmodel/GameViewModel.h"
 #include "../viewmodel/SpiritViewModel.h"
 #include "../view/MainWindow.h"
@@ -21,3 +24,5 @@ private:
 	GameViewModel m_game_viewmodel;
 	SpiritViewModel m_spirit_viewmodel;
 };
+
+#endif

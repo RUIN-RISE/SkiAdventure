@@ -1,3 +1,6 @@
+#ifndef __VECTOR_H__
+#define __VECTOR_H__
+
 class Vector {
 public:
     double x, y;
@@ -34,3 +37,5 @@ public:
     //make length 1
     void normalize();
 };
+
+#endif

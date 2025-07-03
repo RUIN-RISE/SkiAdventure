@@ -1,13 +1,13 @@
 
 add_executable(SkiAdventure main.cpp
-	# common/frame.cpp
+	common/frame.cpp
     common/Curve.cpp
     common/PhysicsEntity.cpp
     common/Timer.cpp
     common/Vector.cpp
-	# viewmodel/commands/NextStepCommand.cpp
-	# viewmodel/GameViewModel.cpp
-	# viewmodel/SpiritViewModel.cpp
+	viewmodel/commands/NextStepCommand.cpp
+	viewmodel/GameViewModel.cpp
+	viewmodel/SpiritViewModel.cpp
 	view/widgets/GameBoard.cpp
 	view/MainWindow.cpp
 	app/app.cpp)
