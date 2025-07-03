@@ -17,10 +17,10 @@ public:
 	GameViewModel& operator=(const GameViewModel&) = delete;
 
 //properties
-	const Curve& getVisibleCurve() const noexcept{
-		return FullCurve;
+	const Curve* getVisibleCurve() const noexcept{
+		return &FullCurve;
 	}
-	Vector getPlayerPosition() const {
+	const Vector getPlayerPosition() const {
 		return plm.getPosition();
 	}
 

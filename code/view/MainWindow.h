@@ -16,6 +16,7 @@ class MainWindow :public Fl_Double_Window
     //commands
 	void set_next_step_command(std::function<void(int)>&& pn) noexcept
 	{
+        // std::cerr << "Set Next Step Command" << std::endl ;
 		m_next_step_command = std::move(pn);
 	}
 

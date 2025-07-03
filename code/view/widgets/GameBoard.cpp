@@ -11,6 +11,8 @@ Gameboard::Gameboard(int x, int y, int w, int h, const char *l):
     map_width(w),
     map_height(h)
 {
+    std::cerr << "Gameboard Created" << std::endl;
+    std::cerr << x << ' ' << y << ' ' << w << ' ' << h << ' ' << std::endl;
     end();
 
     box(FL_NO_BOX);
@@ -53,7 +55,7 @@ std::vector<Vector> Gameboard::get_terrain()
         double y = game_curve->evaluate(x);
         points.emplace_back(x, y);
     }
-    
+    return points;
 }
 
 Vector Gameboard::logic_to_screen(const Vector& logic_pos, 
@@ -67,7 +69,12 @@ Vector Gameboard::logic_to_screen(const Vector& logic_pos,
 
 void Gameboard::draw()
 {
-   const double screen_width = w();
+    //To debug
+    std::cerr << "Drawing" << std::endl ;
+    fl_rectf(x(), y(), w(), h(), FL_RED);
+    return ;
+
+    const double screen_width = w();
     const double screen_height = h();
 
     const double view_left = character_position.x - 0.5*screen_width;

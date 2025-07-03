@@ -16,6 +16,7 @@ public:
 	bool initialize();
 
 	void show_main_window() {
+		std::cerr << "Show Main Window" << std::endl;
 		m_main_wnd.show();
 	}
 

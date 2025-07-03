@@ -8,9 +8,12 @@
 MainWindow::MainWindow(int height,int width, const char* title)
 : Fl_Double_Window(width,height,title),board(BOARD_X,BOARD_Y,BOARD_W,BOARD_H)
 {
+	std::cerr << "Ctor Of MainWindow" << std::endl ;
+	begin();
+	add(board);
     end();
     //开始定时器，每秒刷新60次
-    Fl::add_timeout(1.0 / 60.0, &timeout_cb, this);
+    Fl::add_timeout(deltaTime, &timeout_cb, this);
 
 }
 
@@ -23,8 +26,10 @@ PropertyNotification MainWindow::get_notification()
 {
 	return [this](uint32_t id)->void
 		{
+			// std::cerr << id << std::endl;
 			switch (id) {
 			case PROP_ID_MAP:
+				std::cerr << "Redraw" << std::endl;
 				board.redraw();
 				break;
 			default:
@@ -43,5 +48,5 @@ void MainWindow::timeout_cb(void* pv)
 		pThis->m_next_step_command(l_turn);
 		++ l_turn;
 	}
-	Fl::repeat_timeout(0.2, &timeout_cb, pThis);
+	Fl::repeat_timeout(deltaTime, &timeout_cb, pThis);
 }

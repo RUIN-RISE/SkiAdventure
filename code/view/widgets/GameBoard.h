@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../common/Vector.h"
+#include "../../common/Curve.h"
 
 class Gameboard : public Fl_Group{
     private:
@@ -11,7 +12,7 @@ class Gameboard : public Fl_Group{
     Gameboard(int x,int y,int w,int h,const char *l = nullptr);
     ~Gameboard() noexcept;
 
-    void set_curve(Curve* curve) noexcept
+    void set_curve(const Curve* curve) noexcept
     {
         game_curve = curve;
     }
@@ -44,7 +45,7 @@ class Gameboard : public Fl_Group{
     const std::unique_ptr<Fl_PNG_Image>* character;
     Vector character_position;
     int map_width,map_height;
-    Curve* game_curve = nullptr;
+    const Curve* game_curve = nullptr;
 
     const std::unique_ptr<Fl_PNG_Image>* snow;
 };

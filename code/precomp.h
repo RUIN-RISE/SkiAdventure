@@ -14,7 +14,8 @@
 #include <iostream>
 #include <chrono>
 
-const double deltaTime = 1.0/60 ;
+// const double deltaTime = 1.0/60 ;
+const double deltaTime = 0.2 ;
 
 //FLTK
 #include <FL/Fl.H>
