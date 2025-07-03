@@ -1,0 +1,30 @@
+
+add_executable(SkiAdventure main.cpp
+	# common/frame.cpp
+    common/Curve.cpp
+    common/PhysicsEntity.cpp
+    common/Timer.cpp
+    common/Vector.cpp
+	# viewmodel/commands/NextStepCommand.cpp
+	# viewmodel/GameViewModel.cpp
+	# viewmodel/SpiritViewModel.cpp
+	view/widgets/GameBoard.cpp
+	view/MainWindow.cpp
+	app/app.cpp)
+
+target_precompile_headers(SkiAdventure PRIVATE precomp.h)
+
+set_target_properties(SkiAdventure PROPERTIES
+	WIN32_EXECUTABLE TRUE)
+
+target_link_libraries(SkiAdventure PRIVATE fltk fltk_images)
+
+set(assets_path_list "${CMAKE_CURRENT_BINARY_DIR}/Debug/assets"
+	"${CMAKE_CURRENT_BINARY_DIR}/Release/assets")
+file(MAKE_DIRECTORY ${assets_path_list})
+# foreach(assets_path ${assets_path_list})
+# 	file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/assets/bullet.png"
+# 		"${CMAKE_CURRENT_SOURCE_DIR}/assets/plane_red.png"
+# 		"${CMAKE_CURRENT_SOURCE_DIR}/assets/plane_blue.png"
+# 		DESTINATION "${assets_path}")
+# endforeach()

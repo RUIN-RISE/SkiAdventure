@@ -1,52 +1,66 @@
 #include "GameBoard.h"
 
-Gameboard::Gameboard(int x,int y,int w,int h) 
-    : Fl_Widget(x,y,w,h);
+#define BOX_PLANE_X  (x + 10)
+#define BOX_PLANE_Y  (y + 10)
+#define BOX_PLANE_W  (90)
+#define BOX_PLANE_H  (90)
+
+Gameboard::Gameboard(int x, int y, int w, int h, const char *l): 
+    BaseClass(x,w,y,h,l),
+	m_character(BOX_PLANE_X, BOX_PLANE_Y, BOX_PLANE_W, BOX_PLANE_H)
+{
+    end();
+
+    box(FL_NO_BOX);
+
+    m_character.box(FL_NO_BOX);
+    character = nullptr;
+    snow = nullptr;
+
+}
+
+Gameboard::~Gameboard() noexcept
 {
 
-}
-
-Gameboard::~Gameboard(int x,int y,int w,int h) 
-{
-    id(textureData){
-        stbi_image_free(textureData);
-    }
-}
-
-//加载材质，成功返回1
-bool Gameboard::loadTexture(const std::string& filename){
-    if(textureData) stbi_image_free(textureData);
-    textureData = stbi_load(filename.c_str(),texWidth,texHeight,texChannels,3);
-    return textureData != nullptr;
-}
-
-
-void Gameboard::setmap(const std::vector<Fl_Point>& points){
-    terrain_line = points;
-    redraw();
-    //调用draw
 }
 
 void Gameboard::draw(){
 
-    //折线下方填充贴图
-    if(!terrain_line.empty() && textureData)
+    fl_rectf(x(),y(),w(),h(),FL_CYAN);
+
+    if(!terrain_line.empty() && snow && *snow)
     {
-        for(int row = terrain_line.front().y ; row < h() ; ++row)
+        fl_begin_polygon();
+
+        for(const auto& point : terrain_line)
         {
-            for(int column = 0 ; column < w() ; column += texWidth)
-            {
-                int drawWidth = std::min(texWidth,w()-column);
-                int drawHeight = std::min(texHeight,h()-row);
-                fl_draw_image(textureData,x()+column,y()+row,drawHeight,drawWidth,3);
+            fl_vertex(x() + point.x, y() + point.y);
+        }
+
+        fl_vertex(x()+w(),y()+h());
+        fl_vertex(x(),y()+h());
+        fl_vertex(x(),y()+terrain_line.front().y);
+
+        fl_end_polygon();
+
+        fl_push_clip(x(),y(),w(),h());
+        for(int ypos = y() ; ypos < y() +h() ; ypos += (*snow)-> h())
+        {
+            for(int xpos = x() ; xpos < x() +w() ; xpos += (*snow)-> w()){
+                (*snow)->draw(xpos,ypos);
             }
         }
+        fl_pop_clip();
     }
+    
+    int centerX = x() + w()/2 ;
+    int centerY = y() + h()/2 ;
+    m_character.position(centerX,centerY);
 
-    //绘制一条黑色折线轮廓，确认正确后可以删掉
-    fl_color(Fl_BLACK);
-    fl_begin_line();
-    for(const auto& pt = terrain_line)
-        fl_vertex(x() + pt.x, y()+pt.y);
-    fl_end_line();
+    if(character && *character)
+    {
+        int charX = centerX - (*character)->w()/2;
+        int charY = centerY - (*character)->w()/2;
+        (*character)->draw(charX,charY);
+    }
 }

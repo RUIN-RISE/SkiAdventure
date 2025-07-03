@@ -1,16 +1,16 @@
 #include "../common/property_ids.h"
-
-#include"MainWindow.h"
+#include "MainWindow.h"
 
 #define BOARD_X (5)
 #define BOARD_Y (5)
-//#define BOARD_W (w-5-5)
-//#define BOARD_H (h-50-BOARD_Y)
-MainWindow::MainWindow(int height,int width, const char* title): F1_Double_Window(w,h,title),m_board(BOARD_X,BOARD_Y)
+#define BOARD_W (width-5-5)
+#define BOARD_H (height-50-BOARD_Y)
+MainWindow::MainWindow(int height,int width, const char* title)
+: Fl_Double_Window(width,height,title),board(BOARD_X,BOARD_Y,BOARD_W,BOARD_H)
 {
     end();
-    //开始定时器，每秒刷新10次
-    Fl::add_timeout(1.0 / 10.0, TimerCallback, this);
+    //开始定时器，每秒刷新60次
+    Fl::add_timeout(1.0 / 60.0, &timeout_cb, this);
 
 }
 
@@ -25,7 +25,7 @@ PropertyNotification MainWindow::get_notification()
 		{
 			switch (id) {
 			case PROP_ID_MAP:
-				m_board.redraw();
+				board.redraw();
 				break;
 			default:
 				break;
