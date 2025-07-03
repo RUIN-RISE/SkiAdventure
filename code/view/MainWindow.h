@@ -1,13 +1,10 @@
-#pragma once
+#ifndef __MAIN_WINDOW_H__
+#define __MAIN_WINDOW_H__
 
-#include <FL/Fl.H>
-#include <FL/Fl_Window.H>
-// #include "GameViewModel.h"
-// #include "GameView.h"
-
+#include"../common/frame.h"
 #include "widgets/GameBoard.h"
 
-class MainWindow :public F1_Window
+class MainWindow :public Fl_Double_Window
 {
     public:
     MainWindow(int height,int width, const char* title = nullptr);
@@ -23,7 +20,8 @@ class MainWindow :public F1_Window
 	}
 
     PropertyNotification get_notification();
-    BattleBoard& get_board() noexcept
+    
+    Gameboard& get_board() noexcept
 	{
 		return board;
 	}
@@ -32,5 +30,10 @@ class MainWindow :public F1_Window
 	static void timeout_cb(void*);
 
     private:
-	GameBoard board;
-}
+	Gameboard board;
+
+    private:
+    std::function<void(int)> m_next_step_command;
+};
+
+#endif
