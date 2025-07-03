@@ -8,7 +8,7 @@ bool App::initialize(){
 	//binding
 
 	//properties
-	
+	// m_main_wnd.get_board().
 
 	//commands
 	m_main_wnd.set_next_step_command(m_game_viewmodel.get_next_step_command());
