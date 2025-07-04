@@ -13,6 +13,10 @@ double Curve::derivative(double x) const {
     return (-1 + std::cos(x/w)) * k;
 }
 
+Angle Curve::angle(double x) const {
+    return Angle::from_tan(derivative(x));
+}
+
 std::pair<double, double> Curve::evaluateAndDerivative(double x) const {
     return {evaluate(x), derivative(x)};
 }
