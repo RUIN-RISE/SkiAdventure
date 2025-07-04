@@ -56,7 +56,7 @@ std::vector<Vector> Gameboard::get_terrain()
         double x = view_left + i * step;
         double y = game_curve->evaluate(x);
         points.emplace_back(x, y);
-        std::cerr << "logic x : " << x << ",y : " << y << std::endl ;
+        // std::cerr << "logic x : " << x << ",y : " << y << std::endl ;
     }
     return points;
 }
@@ -73,7 +73,7 @@ Vector Gameboard::logic_to_screen(const Vector& logic_pos,
 void Gameboard::draw()
 {
     //To debug
-    std::cerr << "Drawing" << std::endl ;
+    // std::cerr << "Drawing" << std::endl ;
     // fl_rectf(x(), y(), w(), h(), FL_RED);
     // return ;
 
@@ -88,14 +88,14 @@ void Gameboard::draw()
     std::vector<Vector> terrain_line = get_terrain();
     if(!terrain_line.empty() && snow && *snow)
     {
-        std::cerr << "Start TO Draw with Player: : " << character_position->x << std::endl ;
+        // std::cerr << "Start TO Draw with Player: : " << character_position->x << std::endl ;
         fl_color(FL_WHITE);
         fl_begin_polygon();
 
         for(const auto& point : terrain_line)
         {
             Vector screen_point = logic_to_screen(point,view_left,view_top);
-            std::cerr << "screen x : " << x() + screen_point.x << ",y : " << y() + screen_point.y << std::endl ;
+            // std::cerr << "screen x : " << x() + screen_point.x << ",y : " << y() + screen_point.y << std::endl ;
             fl_vertex(x() + screen_point.x, y() + screen_point.y);
         }
 

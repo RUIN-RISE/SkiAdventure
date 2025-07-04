@@ -14,11 +14,12 @@
 #include <iostream>
 #include <chrono>
 
-// const double deltaTime = 1.0/60 ;
-const double deltaTime = 0.2 ;
+const double deltaTime = 1.0/60 ;
+// const double deltaTime = 0.2 ;
 
 //FLTK
 #include <FL/Fl.H>
+// #include <FL/Fl_Events.H>
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 

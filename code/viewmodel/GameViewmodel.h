@@ -26,9 +26,11 @@ public:
 
 //commands
 	std::function<void(int)> get_next_step_command();
+	std::function<void()> get_jump_command();
 
 //methods
 	void next_step(int turn);
+	void jump();
 
 private:
 //properties
