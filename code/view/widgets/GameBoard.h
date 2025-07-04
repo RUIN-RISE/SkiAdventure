@@ -17,7 +17,7 @@ class Gameboard : public Fl_Group{
         game_curve = curve;
     }
 
-        void set_character_position(const Vector& pos) noexcept
+    void set_character_position(const Vector* pos) noexcept
     {
         character_position = pos;
     }
@@ -44,7 +44,7 @@ class Gameboard : public Fl_Group{
     private:
     std::vector<Vector> terrain_line;
     const std::unique_ptr<Fl_PNG_Image>* character;
-    Vector character_position;
+    const Vector* character_position;
     int map_width,map_height;
     const Curve* game_curve = nullptr;
 

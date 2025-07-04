@@ -29,7 +29,7 @@ PropertyNotification MainWindow::get_notification()
 			// std::cerr << id << std::endl;
 			switch (id) {
 			case PROP_ID_MAP:
-				// std::cerr << "Redraw" << std::endl;
+				std::cerr << "Redraw" << std::endl;
 				board.redraw();
 				break;
 			default:

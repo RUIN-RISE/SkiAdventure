@@ -20,8 +20,8 @@ public:
 	const Curve* getVisibleCurve() const noexcept{
 		return &FullCurve;
 	}
-	const Vector getPlayerPosition() const {
-		return plm.getPosition();
+	const Vector* getPlayerPosition() const {
+		return &plm.getPosition();
 	}
 
 //commands

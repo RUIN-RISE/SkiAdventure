@@ -1,7 +1,7 @@
 #ifndef __CURVE_H__
 #define __CURVE_H__
 
-// y = -x + sin(x)
+// y = (-x + 100sin(x/100)) *7/12
 class Curve {
 public:
     Curve() = default;

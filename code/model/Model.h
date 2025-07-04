@@ -9,8 +9,8 @@ class PlayerModel : public PhysicsEntity{
 	public:
 		PlayerModel():PhysicsEntity(
 			Vector(0,0),
-			Vector(1,0),
-			Vector(0,-10),
+			Vector(100,0),
+			Vector(0,-100),
 			true
 		){
 			// setOnCurve(true);
