@@ -13,8 +13,8 @@ Gameboard::Gameboard(int x, int y, int w, int h, const char *l):
     map_width(w),
     map_height(h)
 {
-    std::cerr << "Gameboard Created" << std::endl;
-    std::cerr << x << ' ' << y << ' ' << w << ' ' << h << ' ' << std::endl;
+    // std::cerr << "Gameboard Created" << std::endl;
+    // std::cerr << x << ' ' << y << ' ' << w << ' ' << h << ' ' << std::endl;
     end();
 
     box(FL_NO_BOX);
@@ -56,6 +56,7 @@ std::vector<Vector> Gameboard::get_terrain()
         double x = view_left + i * step;
         double y = game_curve->evaluate(x);
         points.emplace_back(x, y);
+        std::cerr << "logic x : " << x << ",y : " << y << std::endl ;
     }
     return points;
 }
@@ -65,14 +66,14 @@ Vector Gameboard::logic_to_screen(const Vector& logic_pos,
 {
     Vector screen_pos;
     screen_pos.x = logic_pos.x - view_left;
-    screen_pos.y = logic_pos.y - view_top;
+    screen_pos.y = - (logic_pos.y - view_top);
     return screen_pos;
 }
 
 void Gameboard::draw()
 {
     //To debug
-    std::cerr << "Drawing" << std::endl ;
+    // std::cerr << "Drawing" << std::endl ;
     // fl_rectf(x(), y(), w(), h(), FL_RED);
     // return ;
 
@@ -87,11 +88,13 @@ void Gameboard::draw()
     std::vector<Vector> terrain_line = get_terrain();
     if(!terrain_line.empty() && snow && *snow)
     {
+        std::cerr << "Start TO Draw" << std::endl ;
         fl_begin_polygon();
 
         for(const auto& point : terrain_line)
         {
-            Vector screen_point = logic_to_screen(point,view_left,view_right);
+            Vector screen_point = logic_to_screen(point,view_left,view_top);
+            std::cerr << "screen x : " << screen_point.x << ",y : " << screen_point.y << std::endl ;
             fl_vertex(x() + screen_point.x, y() + screen_point.y);
         }
 

@@ -10,6 +10,7 @@ bool App::initialize(){
 	//properties
 	m_main_wnd.get_board().set_character(m_spirit_viewmodel.get_player());
 	m_main_wnd.get_board().set_curve(m_game_viewmodel.getVisibleCurve());
+	m_main_wnd.get_board().set_snow(m_spirit_viewmodel.get_snow());
     m_main_wnd.get_board().set_character_position(m_game_viewmodel.getPlayerPosition());
 
 	//commands
