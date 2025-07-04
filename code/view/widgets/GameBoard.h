@@ -30,7 +30,7 @@ class Gameboard : public Fl_Group{
         character = p;
 		m_character.image(character->get());
     }
-        void set_snow(const std::unique_ptr<Fl_PNG_Image>* p) noexcept
+    void set_snow(const std::unique_ptr<Fl_PNG_Image>* p) noexcept
     {
         snow = p;
     }

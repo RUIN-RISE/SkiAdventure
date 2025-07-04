@@ -19,6 +19,9 @@ class MainWindow :public Fl_Double_Window
         // std::cerr << "Set Next Step Command" << std::endl ;
 		m_next_step_command = std::move(pn);
 	}
+    void set_jump_command(std::function<void()>&& pn) noexcept{
+        m_jump_command = std::move(pn);
+    }
 
     PropertyNotification get_notification();
     
@@ -29,12 +32,14 @@ class MainWindow :public Fl_Double_Window
     protected:
     //callbacks
 	static void timeout_cb(void*);
+    int handle(int event) override;
 
     private:
 	Gameboard board;
 
     private:
     std::function<void(int)> m_next_step_command;
+    std::function<void()> m_jump_command;
 };
 
 #endif

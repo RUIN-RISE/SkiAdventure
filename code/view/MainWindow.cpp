@@ -29,7 +29,7 @@ PropertyNotification MainWindow::get_notification()
 			// std::cerr << id << std::endl;
 			switch (id) {
 			case PROP_ID_MAP:
-				std::cerr << "Redraw" << std::endl;
+				// std::cerr << "Redraw" << std::endl;
 				board.redraw();
 				break;
 			default:
@@ -50,3 +50,27 @@ void MainWindow::timeout_cb(void* pv)
 	}
 	Fl::repeat_timeout(deltaTime, &timeout_cb, pThis);
 }
+
+int MainWindow::handle(int event) {
+    switch (event) {
+        case FL_KEYDOWN: {
+            // 检查按下的键是否是空格键
+            if (Fl::event_key() == ' ') {
+				std::cerr << "Read a space" << std::endl ;
+                // 确保 ViewModel 已经被设置
+                if (m_jump_command) {
+					std::cerr << "Execute m_jump_command" << std::endl;
+                    // 获取并执行 ViewModel 中的 jump_command
+                    m_jump_command(); // 直接调用 std::function
+                    return 1; // 返回 1 表示事件已被处理，不再传递给其他 widget
+                }
+            }
+            break;
+        }
+        // 如果需要处理按键释放或其他事件，可以在这里添加 case FL_KEYUP 等
+    }
+
+    // 调用基类的 handle 方法，以便处理其他未被当前 handle 方法处理的事件
+    return Fl_Double_Window::handle(event);
+}
+
