@@ -2,6 +2,7 @@
 #define __PHYSICS_ENTITY_H__
 
 #include "Vector.h"
+#include "Angle.h"
 
 class PhysicsEntity {
 public:
@@ -10,6 +11,7 @@ public:
         Vector _position = Vector(0,0),
         Vector _velocity = Vector(0,0),
         Vector _acceleration = Vector(0,-10),
+        Angle _angle = Angle(0),
         bool _onCurve = false
     );
     
@@ -21,6 +23,8 @@ public:
     void setVelocity(Vector vel);
     
     void setPosition(Vector pos);
+
+    void setAngle(Angle ang);
     
     void setOnCurve(bool onCurve);
 
@@ -29,6 +33,8 @@ public:
     const Vector & getVelocity() const;
 
     const Vector & getAcceleration() const;
+
+    const Angle & getAngle() const;
 
     bool isOnCurve() const;
     
@@ -39,6 +45,7 @@ private:
     Vector position;
     Vector velocity;
     Vector acceleration;
+    Angle angle;
     
     // Point is on(at) the curve if onCurve is true
     bool onCurve;
