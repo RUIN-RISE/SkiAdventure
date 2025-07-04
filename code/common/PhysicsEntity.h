@@ -24,11 +24,11 @@ public:
     
     void setOnCurve(bool onCurve);
 
-    Vector getPosition() const;
+    const Vector & PhysicsEntity::getPosition() const;
     
-    Vector getVelocity() const;
+    const Vector & getVelocity() const;
 
-    Vector getAcceleration() const;
+    const Vector & getAcceleration() const;
 
     bool isOnCurve() const;
     

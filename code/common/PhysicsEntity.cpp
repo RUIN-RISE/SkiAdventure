@@ -28,15 +28,15 @@ void PhysicsEntity::setOnCurve(bool onCurve) {
     this->onCurve = onCurve;
 }
 
-Vector PhysicsEntity::getPosition() const {
+const Vector& PhysicsEntity::getPosition() const {
     return position;
 }
 
-Vector PhysicsEntity::getVelocity() const {
+const Vector& PhysicsEntity::getVelocity() const {
     return velocity;
 }
 
-Vector PhysicsEntity::getAcceleration() const {
+const Vector& PhysicsEntity::getAcceleration() const {
     return acceleration;
 }
 
