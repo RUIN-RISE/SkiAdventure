@@ -3,7 +3,7 @@ add_executable(SkiAdventure main.cpp
 	common/frame.cpp
     common/Curve.cpp
     common/PhysicsEntity.cpp
-    common/Timer.cpp
+    common/Angle.cpp
     common/Vector.cpp
 	model/Model.cpp
 	viewmodel/commands/NextStepCommand.cpp
