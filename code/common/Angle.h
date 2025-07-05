@@ -1,7 +1,7 @@
 #ifndef ANGLE_H
 #define ANGLE_H
 
-#include "Vector.h"
+class Vector;
 
 const double PI = 3.1415926535897932385;
 const double TWO_PI = 2.0 * PI;

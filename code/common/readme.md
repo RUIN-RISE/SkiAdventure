@@ -16,7 +16,7 @@ common 层的工作是设计通用、可复用的基础组件和工具。
 
 目前使用 $y=-x+\sin x$ 作为模拟，向右下方延伸的斜坡。
 
-提供 $y(x)$ 、 $y'(x)$ 、`angle` 接口。其中 `angle` 接口直接返回对应点切线的 `Angle` 类。
+提供 $y(x)$ 、 $y'(x)$ 、`angle`、`tangent` 接口。其中 `angle` 接口返回对应点切线的 `Angle` 类，`tangent` 接口返回对应点切线的方向向量。
 
 #### 物理实体 PhysicsEntity 类
 

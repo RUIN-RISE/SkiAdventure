@@ -1,4 +1,5 @@
 #include "Angle.h"
+#include "Vector.h"
 
 // rad_normalize radians to [0, 2π)
 double Angle::rad_normalize(double rad) {

@@ -1,4 +1,5 @@
 #include "Vector.h"
+#include "Angle.h"
 
 Vector::Vector(double x, double y) : x(x), y(y) {}
 
