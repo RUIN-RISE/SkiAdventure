@@ -18,5 +18,5 @@ void GameViewModel::next_step(int turn)
 }
 
 void GameViewModel::jump(){
-	this->plm.jump();
+	this->plm.jump(&this->FullCurve);
 }

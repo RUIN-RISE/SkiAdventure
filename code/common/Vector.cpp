@@ -1,6 +1,6 @@
 #include "Vector.h"
 #include "Angle.h"
-
+#include<cmath>
 Vector::Vector(double x, double y) : x(x), y(y) {}
 
 Vector::Vector(const Vector &other) : x(other.x), y(other.y) {}
@@ -67,4 +67,9 @@ void Vector::normalize() {
 
 Angle Vector::angle() const {
     return Angle::from_tan(y / x);
+}
+
+// 90 degrees rotation
+Vector Vector::orthogonal() const {
+    return Vector(-y, x);
 }

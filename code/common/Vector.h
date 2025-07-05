@@ -40,6 +40,8 @@ public:
     void normalize();
 
     Angle angle() const;
+
+    Vector orthogonal() const;
 };
 
 #endif

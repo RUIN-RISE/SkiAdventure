@@ -9,8 +9,16 @@ class SnowCurve : public Curve{
 		void set_stone(const double &s) {
 			stone = s;
 		}
-		SnowCurve(){
-			stone = -2000; // 开局不要有石头
+		SnowCurve(): Curve(
+			std::vector<Vector>{
+				Vector(2000,-400),
+				Vector(500,-300),
+				Vector(1000,-200),
+				Vector(500,-500),
+				Vector(2000,-400),
+				Vector(500,-800),
+			}
+		), stone(-2000){
 			srand(time(0));
 		}
 	private:
@@ -21,15 +29,15 @@ class PlayerModel : public PhysicsEntity{
 	public:
 		PlayerModel():PhysicsEntity(
 			Vector(0,0),
-			Vector(500,0),
-			Vector(0,-1000),
+			Vector(1000,0),
+			Vector(0,-2000),
 			0,
 			true
 		){
 			// setOnCurve(true);
 		}
 		void update_player(SnowCurve *SC);
-		void jump();
+		void jump(SnowCurve *SC);
 	private:
 		void update_onCurve(SnowCurve *SC);
 		void update_offCurve(SnowCurve *SC);

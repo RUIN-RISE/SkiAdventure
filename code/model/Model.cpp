@@ -1,15 +1,8 @@
 #include "Model.h"
 
-const int offset = 1000 ;
-const double alpha = 0.99 ;
-const double Vec_lim_in_air = 1500 ;
-
 void PlayerModel::update_player(SnowCurve *SC){
 	std::cerr << "Update_player : oncurve : " << isOnCurve() << std::endl ;
 	std::cerr << "Velocity : " << this->getVelocity().x << " " << this->getVelocity().y << std::endl ;
-	if(SC->get_stone() < this->getPosition().x - offset){
-		SC->set_stone(this->getPosition().x + offset + (rand()%(offset * 2)));
-	}
 	if(isOnCurve()) update_onCurve(SC);
 	else update_offCurve(SC);
 }
@@ -24,10 +17,10 @@ void PlayerModel::update_onCurve(SnowCurve *SC){
 	// std::cerr << "New Player Position : " << nx << ' ' << SC->evaluate(nx) << std::endl;
 	this->setPosition(CurvePos);
 
-	double k = SC->derivative(ox); //scope of old x
-	Vector unit_scope = Vector(1,k)/sqrt(1+k*k);
+	Vector unit_scope = SC->tangent(ox);
+	unit_scope.normalize();
 	Vector CurveVel = unit_scope*(this->getVelocity()*unit_scope);
-	this->setVelocity(CurveVel);
+	this->setVelocity(CurveVel - unit_scope * 10); // friction
 }
 
 void PlayerModel::update_offCurve(SnowCurve *SC){
@@ -50,20 +43,18 @@ void PlayerModel::update_offCurve(SnowCurve *SC){
 		this->setVelocity(CurveVel);
 		*/
 	}
-	if(this->getVelocity().x >= Vec_lim_in_air){
-		Vector NexVel = this->getVelocity();
-		NexVel.x *= alpha ;
-		this->setVelocity(NexVel);
-	}
+
 }
 
-void PlayerModel::jump(){
+void PlayerModel::jump(SnowCurve *SC){
 	if(isOnCurve() == false){
 		std::cerr << "Jump in air" << std::endl ;
 		return ;
 	}
 	setOnCurve(false);
 	Vector ov = this->getVelocity();
-	ov.y = 30 ;
+	double ox = this->getPosition().x;
+	Vector normal = SC->tangent(ox).orthogonal();
+	ov += normal * 500;
 	this->setVelocity(ov);
 }

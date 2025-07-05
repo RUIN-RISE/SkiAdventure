@@ -1,6 +1,6 @@
 #include "Angle.h"
 #include "Vector.h"
-
+#include<cmath>
 // rad_normalize radians to [0, 2π)
 double Angle::rad_normalize(double rad) {
     while (rad >= TWO_PI) rad -= TWO_PI;
