@@ -17,6 +17,7 @@ bool App::initialize(){
 	m_main_wnd.get_board().set_snow(m_spirit_viewmodel.get_snow());
 	m_main_wnd.get_board().set_character(m_spirit_viewmodel.get_player());
 	m_main_wnd.get_board().set_stone(m_spirit_viewmodel.get_stone());
+	m_main_wnd.get_board().set_background(m_spirit_viewmodel.get_background());
 
 	//commands
 	m_main_wnd.set_next_step_command(m_game_viewmodel.get_next_step_command());

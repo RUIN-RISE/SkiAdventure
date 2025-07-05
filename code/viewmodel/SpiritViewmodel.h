@@ -28,6 +28,10 @@ public:
 	{
 		return &m_stone;
 	}
+	const std::unique_ptr<Fl_PNG_Image>* get_background() const noexcept
+	{
+		return &m_background;
+	}
 //methods
 	bool initialize();
 
@@ -36,6 +40,7 @@ private:
 	std::unique_ptr<Fl_PNG_Image> m_player;
 	std::unique_ptr<Fl_PNG_Image> m_snow;
 	std::unique_ptr<Fl_PNG_Image> m_stone;
+	std::unique_ptr<Fl_PNG_Image> m_background;
 };
 
 #endif

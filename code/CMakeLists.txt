@@ -29,6 +29,7 @@ foreach(assets_path ${assets_path_list})
 	file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/assets/player.png"
 		"${CMAKE_CURRENT_SOURCE_DIR}/assets/snow.png"
 		"${CMAKE_CURRENT_SOURCE_DIR}/assets/stone.png"
+		"${CMAKE_CURRENT_SOURCE_DIR}/assets/background.png"
 # 		"${CMAKE_CURRENT_SOURCE_DIR}/assets/plane_blue.png"
 		DESTINATION "${assets_path}")
 endforeach()

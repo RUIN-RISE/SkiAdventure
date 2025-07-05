@@ -43,6 +43,10 @@ class Gameboard : public Fl_Group{
     {
         m_img_stone = p;
     }
+    void set_background(const std::unique_ptr<Fl_PNG_Image>* p) noexcept
+    {
+        background = p;
+    }
 
     void set_stone_pos(const double *sp){
         stone_pos = sp;
@@ -59,6 +63,7 @@ class Gameboard : public Fl_Group{
     const std::unique_ptr<Fl_PNG_Image>* m_img_character;
     const std::unique_ptr<Fl_PNG_Image>* snow;
     const std::unique_ptr<Fl_PNG_Image>* m_img_stone;
+    const std::unique_ptr<Fl_PNG_Image>* background;
 
     // const Vector* character_position;
     const PhysicsEntity* character;

@@ -22,7 +22,8 @@ Gameboard::Gameboard(int x, int y, int w, int h, const char *l):
     // m_character.box(FL_NO_BOX);
     character = nullptr;
     snow = nullptr;
-
+    background = nullptr;
+    m_img_stone = nullptr;
 }
 
 Gameboard::~Gameboard() noexcept
@@ -83,10 +84,12 @@ void draw_img(int centerX,int centerY,const std::unique_ptr<Fl_PNG_Image> * m_im
     }
 }
 
+
+
 void Gameboard::draw()
 {
     //To debug
-    // std::cerr << "Drawing" << std::endl ;
+    //std::cerr << "Drawing" << std::endl ;
     // fl_rectf(x(), y(), w(), h(), FL_RED);
     // return ;
     double ch_x = character->getPosition().x;
@@ -99,25 +102,107 @@ void Gameboard::draw()
     const double view_right = ch_x + 0.5*screen_width;
     const double view_top = ch_y + 0.5*screen_height;
     const double view_bottom = ch_y - 0.5*screen_height;
+    if (background){
+        //std::cerr << "Background good." << std::endl ;
+        (*background)->draw(x(), y(), w(), h());
+        //std::cerr << "Draw end." << std::endl ;
+    }
+    else{
     fl_rectf(x(),y(),w(),h(),FL_CYAN);
+    }
     std::vector<Vector> terrain_line = get_terrain();
-    if(!terrain_line.empty() && snow && *snow)
+
+/*    int band_height = 50;  // 每条带的高度（可调）
+int num_bands = h() / band_height;
+
+// 顶部白色
+int r_top = 255, g_top = 255, b_top = 255;
+// 底部冷蓝色
+int r_bottom = 100, g_bottom = 150, b_bottom = 255;
+
+for (int i = 0; i < num_bands; ++i) {
+    double t = static_cast<double>(i) / (num_bands - 1);
+    int r = static_cast<int>(r_top * (1 - t) + r_bottom * t);
+    int g = static_cast<int>(g_top * (1 - t) + g_bottom * t);
+    int b = static_cast<int>(b_top * (1 - t) + b_bottom * t);
+    fl_color(fl_rgb_color(r, g, b));
+    
+    int y_band = y() + i * band_height;
+    fl_rectf(x(), y_band, w(), band_height);
+}
+std::vector<double> snow_top_y(w(), screen_height); // 存每个 x 像素对应雪坡顶部 y 坐标，初始为最底部
+
+// Step 1: 记录雪坡顶部轮廓
+for (const auto& point : terrain_line) {
+    Vector screen_point = logic_to_screen(point, view_left, view_top);
+    int x_pos = static_cast<int>(x() + screen_point.x);
+    int y_pos = static_cast<int>(y() + screen_point.y);
+    if (x_pos >= 0 && x_pos < w()) {
+        snow_top_y[x_pos] = std::min(snow_top_y[x_pos], static_cast<double>(y_pos));
+    }
+}
+
+// Step 2: 按条带渐变填充雪坡区域
+for (int y_band = 0; y_band < h(); y_band += band_height) {
+    double t = static_cast<double>(y_band) / h();  // 渐变比例
+    int r = static_cast<int>(255 * (1 - t) + 100 * t);
+    int g = static_cast<int>(255 * (1 - t) + 150 * t);
+    int b = static_cast<int>(255 * (1 - t) + 255 * t);
+    fl_color(fl_rgb_color(r, g, b));
+
+    for (int x_pos = 0; x_pos < w(); ++x_pos) {
+        if (y_band >= snow_top_y[x_pos]) {  // 雪坡区域内才填充
+            fl_rectf(x() + x_pos, y() + y_band, 1, band_height);
+        }
+    }
+}
+*/
+
+if(!terrain_line.empty() && snow && *snow)
     {
         // std::cerr << "Start TO Draw with Player: : " << character_position->x << std::endl ;
         fl_color(FL_WHITE);
         fl_begin_polygon();
 
-        for(const auto& point : terrain_line)
-        {
-            Vector screen_point = logic_to_screen(point,view_left,view_top);
-            // std::cerr << "screen x : " << x() + screen_point.x << ",y : " << y() + screen_point.y << std::endl ;
-            fl_vertex(x() + screen_point.x, y() + screen_point.y);
-        }
-
+            for(const auto& point : terrain_line)
+            {
+                Vector screen_point = logic_to_screen(point,view_left,view_top);
+                // std::cerr << "screen x : " << x() + screen_point.x << ",y : " << y() + screen_point.y << std::endl ;
+                fl_vertex(x() + screen_point.x, y() + screen_point.y);
+            }
         fl_vertex(x()+w(),y()+h());
         fl_vertex(x(),y()+h());
 
         fl_end_polygon();
+    }
+    if(!terrain_line.empty() && snow && *snow)
+    {
+        // std::cerr << "Start TO Draw with Player: : " << character_position->x << std::endl ;
+        for(int i= 0 ; i < 150; i++)
+        {
+        fl_color(fl_rgb_color(255-1*i,255-1.5*i,255));
+        fl_begin_polygon();
+
+            for(const auto& point : terrain_line)
+            {
+                Vector screen_point = logic_to_screen(point,view_left,view_top);
+                // std::cerr << "screen x : " << x() + screen_point.x << ",y : " << y() + screen_point.y << std::endl ;
+                fl_vertex(x() + screen_point.x, y() + screen_point.y+10*i);
+            }
+
+            for (int j = terrain_line.size() - 1; j >= 0; --j) {
+            const auto& point = terrain_line[j];
+            Vector screen_point = logic_to_screen(point, view_left, view_top);
+            fl_vertex(x() + screen_point.x, y() + screen_point.y+10*i+10);
+            }
+            fl_end_polygon();
+        }
+
+        //fl_vertex(x()+w(),y()+h());
+        //fl_vertex(x(),y()+h());
+
+        //fl_end_polygon();
+        }
 
         // fl_push_clip(x(),y(),w(),h());
         // for(int ypos = y() ; ypos < y() +h() ; ypos += (*snow)-> h())
@@ -128,17 +213,7 @@ void Gameboard::draw()
         // }
         // fl_pop_clip();
 
-        /*
-        fl_color(FL_BLACK);
-        fl_begin_line();
-        for(const auto& point : terrain_line)
-        {
-            Vector screen_point = logic_to_screen(point,view_left,view_top);
-            fl_vertex(x() + screen_point.x, y() + screen_point.y);
-        }
-        fl_end_line();
-        */
-    }
+
 
     int stone_width = (*m_img_stone)->w();
     if(*stone_pos >= view_left-(stone_width/2) && *stone_pos <= view_right+(stone_width/2)){

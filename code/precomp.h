@@ -1,4 +1,4 @@
-
+#define NOMINMAX 
 #ifndef __PRE_COMP_H__
 #define __PRE_COMP_H__
 
@@ -12,6 +12,7 @@
 #include <cmath>
 #include <utility>
 #include <iostream>
+#include <algorithm>
 #include <chrono>
 
 const double deltaTime = 1.0/60 ;
