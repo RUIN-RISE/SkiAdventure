@@ -1,5 +1,6 @@
 #include "../common/Curve.h"
 #include "../common/PhysicsEntity.h"
+#include "../common/Timer.h"
 
 class SnowCurve : public Curve{
 	public:
@@ -35,10 +36,13 @@ class PlayerModel : public PhysicsEntity{
 			true
 		){
 			// setOnCurve(true);
+			dizzy = false ;
 		}
-		void update_player(SnowCurve *SC);
+		void update_game(SnowCurve *SC);
 		void jump(SnowCurve *SC);
 	private:
 		void update_onCurve(SnowCurve *SC);
 		void update_offCurve(SnowCurve *SC);
+		Timer dizzy_time;
+		bool dizzy;
 };

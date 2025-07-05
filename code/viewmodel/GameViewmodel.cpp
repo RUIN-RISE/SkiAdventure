@@ -13,7 +13,7 @@
 void GameViewModel::next_step(int turn)
 {
 	// std::cerr << "next_step" << std::endl;
-	this->plm.update_player(&this->FullCurve);
+	this->plm.update_game(&this->FullCurve);
 	fire(PROP_ID_MAP);
 }
 
