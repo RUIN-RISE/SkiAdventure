@@ -23,6 +23,13 @@ public:
 	const Vector* getPlayerPosition() const {
 		return &plm.getPosition();
 	}
+	const PhysicsEntity* getPlayerInstance() const {
+		return &plm;
+	}
+
+	const double* getStonePosition() const {
+		return &FullCurve.get_stone();
+	}
 
 //commands
 	std::function<void(int)> get_next_step_command();

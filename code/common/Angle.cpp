@@ -24,7 +24,9 @@ Angle Angle::from_tan(double tangent) {
 // Calculate the angle between two angles in radians
 double Angle::between_rad(Angle a, Angle b) {
     double res = rad_normalize(a.rad_ - b.rad_);
-    return std::min(res, TWO_PI - res);
+    // return std::min(res, TWO_PI - res); 不同环境这里会报错
+    if(res < TWO_PI - res) return res ;
+    return TWO_PI - res ;
 }
 
 void Angle::set_rad(double rad) {

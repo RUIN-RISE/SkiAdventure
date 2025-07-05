@@ -1,8 +1,15 @@
 #include "Model.h"
 
+const int offset = 1000 ;
+const double alpha = 0.99 ;
+const double Vec_lim_in_air = 1500 ;
+
 void PlayerModel::update_player(SnowCurve *SC){
 	std::cerr << "Update_player : oncurve : " << isOnCurve() << std::endl ;
 	std::cerr << "Velocity : " << this->getVelocity().x << " " << this->getVelocity().y << std::endl ;
+	if(SC->get_stone() < this->getPosition().x - offset){
+		SC->set_stone(this->getPosition().x + offset + (rand()%(offset * 2)));
+	}
 	if(isOnCurve()) update_onCurve(SC);
 	else update_offCurve(SC);
 }
@@ -43,7 +50,11 @@ void PlayerModel::update_offCurve(SnowCurve *SC){
 		this->setVelocity(CurveVel);
 		*/
 	}
-
+	if(this->getVelocity().x >= Vec_lim_in_air){
+		Vector NexVel = this->getVelocity();
+		NexVel.x *= alpha ;
+		this->setVelocity(NexVel);
+	}
 }
 
 void PlayerModel::jump(){

@@ -8,11 +8,15 @@ bool App::initialize(){
 	//binding
 
 	//properties
-	m_main_wnd.get_board().set_character(m_spirit_viewmodel.get_player());
+	
 	m_main_wnd.get_board().set_curve(m_game_viewmodel.getVisibleCurve());
-	m_main_wnd.get_board().set_snow(m_spirit_viewmodel.get_snow());
     // m_main_wnd.get_board().set_character_position(m_game_viewmodel.getPlayerPosition());
 	m_main_wnd.get_board().set_player_instance(m_game_viewmodel.getPlayerInstance());
+	m_main_wnd.get_board().set_stone_pos(m_game_viewmodel.getStonePosition());
+
+	m_main_wnd.get_board().set_snow(m_spirit_viewmodel.get_snow());
+	m_main_wnd.get_board().set_character(m_spirit_viewmodel.get_player());
+	m_main_wnd.get_board().set_stone(m_spirit_viewmodel.get_stone());
 
 	//commands
 	m_main_wnd.set_next_step_command(m_game_viewmodel.get_next_step_command());
