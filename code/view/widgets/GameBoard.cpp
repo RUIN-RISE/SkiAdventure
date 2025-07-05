@@ -9,7 +9,7 @@ Gameboard::Gameboard(int x, int y, int w, int h, const char *l):
     // BaseClass(x,w,y,h,l),
     BaseClass(x,y,w,h,l),
 	// m_character(BOX_PLANE_X, BOX_PLANE_Y, BOX_PLANE_W, BOX_PLANE_H),
-    m_character(x,y,25,25),
+    // m_character(x,y,25,25),
     map_width(w),
     map_height(h)
 {
@@ -19,7 +19,7 @@ Gameboard::Gameboard(int x, int y, int w, int h, const char *l):
 
     box(FL_NO_BOX);
 
-    m_character.box(FL_NO_BOX);
+    // m_character.box(FL_NO_BOX);
     character = nullptr;
     snow = nullptr;
 
@@ -44,12 +44,15 @@ std::vector<Vector> Gameboard::get_terrain()
     const double screen_width = w();
     const double screen_height = h();
 
-    const double view_left = character_position->x - 0.5*screen_width;
-    const double view_right = character_position->x + 0.5*screen_width;
-    const double view_top = character_position->y + 0.5*screen_height;
-    const double view_bottom = character_position->y - 0.5*screen_height;
+    double ch_x = character->getPosition().x;
+    double ch_y = character->getPosition().y;
 
-    const int num_points = 20;
+    const double view_left = ch_x - 0.5*screen_width;
+    const double view_right = ch_x + 0.5*screen_width;
+    const double view_top = ch_y + 0.5*screen_height;
+    const double view_bottom = ch_y - 0.5*screen_height;
+
+    const int num_points = 50;
     const double step = (view_right - view_left) / (num_points - 1);
 
     for (int i = 0; i < num_points; ++i) {
@@ -70,20 +73,32 @@ Vector Gameboard::logic_to_screen(const Vector& logic_pos,
     return screen_pos;
 }
 
+//use screen pos of center to draw an img
+void draw_img(int centerX,int centerY,const std::unique_ptr<Fl_PNG_Image> * m_img){
+    if(m_img && *m_img)
+    {
+        int charX = centerX - (*m_img)->w()/2;
+        int charY = centerY - (*m_img)->w()/2;
+        (*m_img)->draw(charX,charY);
+    }
+}
+
 void Gameboard::draw()
 {
     //To debug
     // std::cerr << "Drawing" << std::endl ;
     // fl_rectf(x(), y(), w(), h(), FL_RED);
     // return ;
+    double ch_x = character->getPosition().x;
+    double ch_y = character->getPosition().y;
 
     const double screen_width = w();
     const double screen_height = h();
 
-    const double view_left = character_position->x - 0.5*screen_width;
-    const double view_right = character_position->x + 0.5*screen_width;
-    const double view_top = character_position->y + 0.5*screen_height;
-    const double view_bottom = character_position->y - 0.5*screen_height;
+    const double view_left = ch_x - 0.5*screen_width;
+    const double view_right = ch_x + 0.5*screen_width;
+    const double view_top = ch_y + 0.5*screen_height;
+    const double view_bottom = ch_y - 0.5*screen_height;
     fl_rectf(x(),y(),w(),h(),FL_CYAN);
     std::vector<Vector> terrain_line = get_terrain();
     if(!terrain_line.empty() && snow && *snow)
@@ -125,15 +140,23 @@ void Gameboard::draw()
         */
     }
 
-    int centerX = x() + w()/2 ;
-    int centerY = y() + h()/2 ;
-    m_character.position(centerX,centerY);
-
-    if(character && *character)
-    {
-        int charX = centerX - (*character)->w()/2;
-        int charY = centerY - (*character)->w()/2;
-        (*character)->draw(charX,charY);
+    int stone_width = (*m_img_stone)->w();
+    if(*stone_pos >= view_left-(stone_width/2) && *stone_pos <= view_right+(stone_width/2)){
+        double stone_y = game_curve->evaluate(*stone_pos);
+        Vector screen_point = logic_to_screen(Vector(*stone_pos,stone_y),view_left,view_top);
+        draw_img(screen_point.x,screen_point.y,m_img_stone);
     }
+
+    draw_img(x() + w()/2 , y() + h()/2,m_img_character);
+    // int centerX = x() + w()/2 ;
+    // int centerY = y() + h()/2 ;
+    // // m_character.position(centerX,centerY);
+
+    // if(m_img_character && *m_img_character)
+    // {
+    //     int charX = centerX - (*m_img_character)->w()/2;
+    //     int charY = centerY - (*m_img_character)->w()/2;
+    //     (*m_img_character)->draw(charX,charY);
+    // }
     // BaseClass::draw_children();
 }

@@ -18,5 +18,9 @@ bool SpiritViewModel::initialize()
 	m_snow = std::make_unique<Fl_PNG_Image>((str + "snow.png").c_str());
 	if (m_snow->fail())
 		return false;
+
+	m_stone = std::make_unique<Fl_PNG_Image>((str + "stone.png").c_str());
+	if (m_stone->fail())
+		return false;
 	return true;
 }

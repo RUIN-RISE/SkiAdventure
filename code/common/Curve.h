@@ -1,19 +1,28 @@
-#ifndef __CURVE_H__
-#define __CURVE_H__
+#ifndef CURVE_H
+#define CURVE_H
+#include<vector>
+#include "Vector.h"
+#include "Angle.h"
 
-// y = (-x + 100sin(x/100)) *7/12
 class Curve {
 public:
-    Curve() = default;
+    Curve(std::vector<Vector> deltas);
 
-    // y(x)
+    void build_points(std::vector<Vector> deltas);
+
     double evaluate(double x) const;
 
-    // y'(x)
     double derivative(double x) const;
 
-    // <y(x), y'(x)>
-    std::pair<double, double> evaluateAndDerivative(double x) const;
+    Angle angle(double x) const;
+
+    Vector tangent(double x) const;
+
+private:
+    // points: [O-delta[n-1], O, O+delta[0], O+delta[0]+delta[1], ..., O+sum(deltas), O+sum(deltas)+delta[0]]
+    std::vector<Vector> points;
+    std::vector<double> slopes;
+    double period_x, period_y;
 };
 
 #endif

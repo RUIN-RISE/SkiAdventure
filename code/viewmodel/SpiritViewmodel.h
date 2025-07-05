@@ -24,6 +24,10 @@ public:
 	{
 		return &m_snow;
 	}
+	const std::unique_ptr<Fl_PNG_Image>* get_stone() const noexcept
+	{
+		return &m_stone;
+	}
 //methods
 	bool initialize();
 
@@ -31,6 +35,7 @@ private:
 //properties
 	std::unique_ptr<Fl_PNG_Image> m_player;
 	std::unique_ptr<Fl_PNG_Image> m_snow;
+	std::unique_ptr<Fl_PNG_Image> m_stone;
 };
 
 #endif

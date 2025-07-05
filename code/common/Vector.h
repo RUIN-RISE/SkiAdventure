@@ -1,6 +1,8 @@
 #ifndef __VECTOR_H__
 #define __VECTOR_H__
 
+class Angle;
+
 class Vector {
 public:
     double x, y;
@@ -11,20 +13,20 @@ public:
 
     Vector operator+(const Vector& other) const;
 
-    Vector operator+=(const Vector& other);
+    const Vector & operator+=(const Vector& other);
 
     Vector operator-(const Vector& other) const;
 
-    Vector operator-=(const Vector& other);
+    const Vector & operator-=(const Vector& other);
 
     //scalar multiplication
     Vector operator*(double scalar) const;
 
-    Vector operator*=(double scalar);
+    const Vector & operator*=(double scalar);
 
     Vector operator/(double scalar) const;
 
-    Vector operator/=(double scalar);
+    const Vector & operator/=(double scalar);
 
     //inner product
     double operator*(const Vector& other) const;
@@ -36,6 +38,10 @@ public:
 
     //make length 1
     void normalize();
+
+    Angle angle() const;
+
+    Vector orthogonal() const;
 };
 
 #endif
