@@ -63,3 +63,7 @@ void Vector::normalize() {
         y /= len;
     }
 }
+
+Angle Vector::angle() const {
+    return Angle::from_tan(y / x);
+}

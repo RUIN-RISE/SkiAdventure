@@ -1,6 +1,8 @@
 #ifndef __VECTOR_H__
 #define __VECTOR_H__
 
+#include "Angle.h"
+
 class Vector {
 public:
     double x, y;
@@ -36,6 +38,8 @@ public:
 
     //make length 1
     void normalize();
+
+    Angle angle() const;
 };
 
 #endif
