@@ -22,6 +22,9 @@ class MainWindow :public Fl_Double_Window
     void set_jump_command(std::function<void()>&& pn) noexcept{
         m_jump_command = std::move(pn);
     }
+    void set_start_command(std::function<bool()>&& pn)noexcept{
+        m_start_command = std::move(pn);
+    }
 
     PropertyNotification get_notification();
     
@@ -40,6 +43,7 @@ class MainWindow :public Fl_Double_Window
     private:
     std::function<void(int)> m_next_step_command;
     std::function<void()> m_jump_command;
+    std::function<bool()> m_start_command;
 };
 
 #endif

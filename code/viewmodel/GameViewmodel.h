@@ -8,7 +8,7 @@
 class GameViewModel : public PropertyTrigger
 {
 public:
-	GameViewModel() = default;
+	GameViewModel();
 	GameViewModel(const GameViewModel&) = delete;
 	~GameViewModel() noexcept
 	{
@@ -34,15 +34,18 @@ public:
 //commands
 	std::function<void(int)> get_next_step_command();
 	std::function<void()> get_jump_command();
+	std::function<bool()> get_start_command();
 
 //methods
 	void next_step(int turn);
 	void jump();
+	bool start_game();
 
 private:
 //properties
 	SnowCurve FullCurve;
 	PlayerModel plm;
+	int GameStatus; // 0->stop(wait to start)
 };
 
 #endif

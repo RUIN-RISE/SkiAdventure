@@ -55,6 +55,11 @@ int MainWindow::handle(int event) {
     switch (event) {
         case FL_KEYDOWN: {
             // 检查按下的键是否是空格键
+			if(m_start_command){
+				if(m_start_command()){
+					return 1 ;
+				}
+			}
             if (Fl::event_key() == ' ') {
 				std::cerr << "Read a space" << std::endl ;
                 // 确保 ViewModel 已经被设置

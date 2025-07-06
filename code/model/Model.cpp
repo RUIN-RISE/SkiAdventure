@@ -132,3 +132,10 @@ void PlayerModel::jump(SnowCurve *SC){
 	ov += normal * 800;
 	this->setVelocity(ov);
 }
+
+void PlayerModel::reset(){
+	this->setPosition(Vector(0,0));
+	this->setVelocity(Vector(1000,0));
+	this->setOnCurve(true);
+	this->dizzy = false ;
+}

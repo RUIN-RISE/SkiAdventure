@@ -22,6 +22,9 @@ class SnowCurve : public Curve{
 		), stone(-2000){
 			srand(time(0));
 		}
+		void reset(){
+			stone = -2000 ;
+		}
 	private:
 		double stone; // the x of stone
 };
@@ -40,6 +43,7 @@ class PlayerModel : public PhysicsEntity{
 		}
 		void update_game(SnowCurve *SC);
 		void jump(SnowCurve *SC);
+		void reset();
 	private:
 		void update_onCurve(SnowCurve *SC);
 		void update_offCurve(SnowCurve *SC);

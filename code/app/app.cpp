@@ -22,6 +22,7 @@ bool App::initialize(){
 	//commands
 	m_main_wnd.set_next_step_command(m_game_viewmodel.get_next_step_command());
 	m_main_wnd.set_jump_command(m_game_viewmodel.get_jump_command());
+	m_main_wnd.set_start_command(m_game_viewmodel.get_start_command());
 
 	//notification
 	m_game_viewmodel.add_notification(m_main_wnd.get_notification());

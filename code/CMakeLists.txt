@@ -10,6 +10,7 @@ add_executable(SkiAdventure main.cpp
 	model/Model.cpp
 	viewmodel/commands/NextStepCommand.cpp
 	viewmodel/commands/JumpCommand.cpp
+	viewmodel/commands/StartCommand.cpp
 	viewmodel/GameViewModel.cpp
 	viewmodel/SpiritViewModel.cpp
 	view/widgets/GameBoard.cpp
