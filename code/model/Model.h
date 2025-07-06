@@ -43,6 +43,7 @@ class PlayerModel : public PhysicsEntity{
 	private:
 		void update_onCurve(SnowCurve *SC);
 		void update_offCurve(SnowCurve *SC);
+		void get_dizzy();
 		Timer dizzy_time;
 		bool dizzy;
 };

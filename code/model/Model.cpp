@@ -13,9 +13,17 @@ double dist(const Vector &a,const Vector &b){
 	return sqrt((ax-bx)*(ax-bx) + (ay-by)*(ay-by));
 }
 
+void PlayerModel::get_dizzy(){
+	dizzy_time.reset() ;
+	dizzy = true ;
+	this->setVelocity(Vector(1000,0));
+	this->setAngle(Angle());
+}
+
 void PlayerModel::update_game(SnowCurve *SC){
 	std::cerr << "Update_player : oncurve : " << isOnCurve() << std::endl ;
 	std::cerr << "Velocity : " << this->getVelocity().x << " " << this->getVelocity().y << std::endl ;
+	std::cerr << "Angle : " << this->getAngle().deg() << " " << this->getVelocity().y << std::endl ;
 	double px = this->getPosition().x;
 	double sx = SC->get_stone();
 	
@@ -28,9 +36,7 @@ void PlayerModel::update_game(SnowCurve *SC){
 	if(dist(this->getPosition(),Vector(sx,SC->evaluate(sx))) <= eps){
 		SC->set_stone(sx + offset * 2 + (rand()%(offset * 2)));
 		sx = SC->get_stone();
-		dizzy_time.reset() ;
-		dizzy = true ;
-		this->setVelocity(Vector(1000,0));
+		this->get_dizzy();
 		this->setPosition(Vector(px,SC->evaluate(px)));
 	}
 	if(dizzy && dizzy_time.elapsed() > DizzyTime){
@@ -38,7 +44,7 @@ void PlayerModel::update_game(SnowCurve *SC){
 	}
 	if(dizzy == false){
 		if(isOnCurve()) update_onCurve(SC);
-		else update_offCurve(SC);		
+		else update_offCurve(SC);
 	}
 	else {
 		std::cerr << "dizzy_time : " << dizzy_time.elapsed() << std::endl ;
@@ -58,8 +64,11 @@ void PlayerModel::update_onCurve(SnowCurve *SC){
 	Vector unit_scope = SC->tangent(ox);
 	unit_scope.normalize();
 	Vector CurveVel = unit_scope*(this->getVelocity()*unit_scope);
-	this->setVelocity(CurveVel - unit_scope * 2); // friction
+	this->setVelocity(CurveVel - unit_scope * 5); // friction
 }
+
+const double delta_theta = 8.0 ;
+const double eps_theta = 1.0 ; // rad
 
 void PlayerModel::update_offCurve(SnowCurve *SC){
 	double ox = this->getPosition().x;
@@ -72,21 +81,48 @@ void PlayerModel::update_offCurve(SnowCurve *SC){
 		setOnCurve(true) ;
 
 		this->setPosition(CurvePos);
+		//检查落地角度，判断是否晕眩
+		Angle angle = this->getAngle();
+		Angle SC_angle = SC->tangent(nx).angle();
+		Angle horizon = Angle();
+		
+		if(!angle.is_between((SC_angle-eps_theta).rad(),(SC_angle+eps_theta).rad())
+			&& !angle.is_between((horizon-eps_theta).rad(),(horizon+eps_theta).rad())
+		){
+			this->get_dizzy();
+		}
+		std::cerr << "Dizzy Check! angle , SC_angle : " << angle.deg() << ' ' << SC_angle.deg() << std::endl ;
+
+
+		this->setAngle(Angle());
 
 		/*
 		下一帧再更新速度
-		double k = SC->derivative(ox); //scope of old x
-		Vector unit_scope = Vector(1,k)/sqrt(1+k*k);
-		Vector CurveVel = unit_scope*(this->getVelocity()*unit_scope);
-		this->setVelocity(CurveVel);
 		*/
 	}
-
+	else{
+		Angle angle = this->getAngle();
+		if(angle.deg() >= 180.0){
+			angle += Angle::from_degree(delta_theta / 3) ;
+			if(angle.deg() < 180) angle = Angle();
+		}
+		else{
+			angle -= Angle::from_degree(delta_theta / 3) ;
+			if(angle.deg() > 180) angle = Angle();
+		}
+		this->setAngle(angle);
+	}
 }
 
 void PlayerModel::jump(SnowCurve *SC){
+	if(dizzy) return ;
 	if(isOnCurve() == false){
 		std::cerr << "Jump in air" << std::endl ;
+		
+		Angle angle = this->getAngle() ;
+		angle += Angle::from_degree(delta_theta) ;
+		this->setAngle(angle);
+		
 		return ;
 	}
 	setOnCurve(false);

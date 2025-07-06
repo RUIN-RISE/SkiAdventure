@@ -9,7 +9,7 @@ Gameboard::Gameboard(int x, int y, int w, int h, const char *l):
     // BaseClass(x,w,y,h,l),
     BaseClass(x,y,w,h,l),
 	// m_character(BOX_PLANE_X, BOX_PLANE_Y, BOX_PLANE_W, BOX_PLANE_H),
-    // m_character(x,y,25,25),
+    // m_character(x+w/2,y+h/2,75,75,nullptr),
     map_width(w),
     map_height(h)
 {
@@ -79,7 +79,7 @@ void draw_img(int centerX,int centerY,const std::unique_ptr<Fl_PNG_Image> * m_im
     if(m_img && *m_img)
     {
         int charX = centerX - (*m_img)->w()/2;
-        int charY = centerY - (*m_img)->w()/2;
+        int charY = centerY - (*m_img)->h()/2;
         (*m_img)->draw(charX,charY);
     }
 }
@@ -158,18 +158,18 @@ for (int y_band = 0; y_band < h(); y_band += band_height) {
 }
 */
 
-if(!terrain_line.empty() && snow && *snow)
+    if(!terrain_line.empty() && snow && *snow)
     {
         // std::cerr << "Start TO Draw with Player: : " << character_position->x << std::endl ;
         fl_color(FL_WHITE);
         fl_begin_polygon();
 
-            for(const auto& point : terrain_line)
-            {
-                Vector screen_point = logic_to_screen(point,view_left,view_top);
-                // std::cerr << "screen x : " << x() + screen_point.x << ",y : " << y() + screen_point.y << std::endl ;
-                fl_vertex(x() + screen_point.x, y() + screen_point.y);
-            }
+        for(const auto& point : terrain_line)
+        {
+            Vector screen_point = logic_to_screen(point,view_left,view_top);
+            // std::cerr << "screen x : " << x() + screen_point.x << ",y : " << y() + screen_point.y << std::endl ;
+            fl_vertex(x() + screen_point.x, y() + screen_point.y);
+        }
         fl_vertex(x()+w(),y()+h());
         fl_vertex(x(),y()+h());
 
@@ -180,9 +180,8 @@ if(!terrain_line.empty() && snow && *snow)
         // std::cerr << "Start TO Draw with Player: : " << character_position->x << std::endl ;
         for(int i= 0 ; i < 150; i++)
         {
-        fl_color(fl_rgb_color(255-1*i,255-1.5*i,255));
-        fl_begin_polygon();
-
+            fl_color(fl_rgb_color(255-1*i,255-1.5*i,255));
+            fl_begin_polygon();
             for(const auto& point : terrain_line)
             {
                 Vector screen_point = logic_to_screen(point,view_left,view_top);
@@ -191,9 +190,9 @@ if(!terrain_line.empty() && snow && *snow)
             }
 
             for (int j = terrain_line.size() - 1; j >= 0; --j) {
-            const auto& point = terrain_line[j];
-            Vector screen_point = logic_to_screen(point, view_left, view_top);
-            fl_vertex(x() + screen_point.x, y() + screen_point.y+10*i+10);
+                const auto& point = terrain_line[j];
+                Vector screen_point = logic_to_screen(point, view_left, view_top);
+                fl_vertex(x() + screen_point.x, y() + screen_point.y+10*i+10);
             }
             fl_end_polygon();
         }
@@ -204,17 +203,6 @@ if(!terrain_line.empty() && snow && *snow)
         //fl_end_polygon();
         }
 
-        // fl_push_clip(x(),y(),w(),h());
-        // for(int ypos = y() ; ypos < y() +h() ; ypos += (*snow)-> h())
-        // {
-        //     for(int xpos = x() ; xpos < x() +w() ; xpos += (*snow)-> w()){
-        //         (*snow)->draw(xpos,ypos);
-        //     }
-        // }
-        // fl_pop_clip();
-
-
-
     int stone_width = (*m_img_stone)->w();
     if(*stone_pos >= view_left-(stone_width/2) && *stone_pos <= view_right+(stone_width/2)){
         double stone_y = game_curve->evaluate(*stone_pos);
@@ -222,10 +210,14 @@ if(!terrain_line.empty() && snow && *snow)
         draw_img(screen_point.x,screen_point.y,m_img_stone);
     }
 
-    draw_img(x() + w()/2 , y() + h()/2,m_img_character);
-    // int centerX = x() + w()/2 ;
-    // int centerY = y() + h()/2 ;
-    // // m_character.position(centerX,centerY);
+    // draw_img(x() + w()/2 , y() + h()/2,m_img_character);
+    int centerX = x() + w()/2 ;
+    int centerY = y() + h()/2 ;
+    m_character->get()->position(centerX,centerY);
+    m_character->get()->set_angle(-this->character->getAngle().deg()); //由于旋转的实现：逆时针为负方向，与常规意义相反，故此处取反
+    m_character->get()->draw();
+
+    std::cerr << "center x,y : " << centerX << ' ' << centerY << std::endl;
 
     // if(m_img_character && *m_img_character)
     // {

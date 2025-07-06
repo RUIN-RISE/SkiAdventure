@@ -31,4 +31,10 @@ const double deltaTime = 1.0/60 ;
 
 #include <FL/fl_ask.H>
 
+//Stb
+// #define STB_IMAGE_RESIZE2_IMPLEMENTATION
+
+// #include <stb_image.h>
+// #include <stb_image_resize2.h>
+
 #endif

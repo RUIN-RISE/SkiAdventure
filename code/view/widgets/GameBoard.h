@@ -3,6 +3,7 @@
 #include "../../common/Vector.h"
 #include "../../common/Curve.h"
 #include "../../common/PhysicsEntity.h"
+#include "../../common/Rotator.h"
 
 class Gameboard : public Fl_Group{
     private:
@@ -30,9 +31,13 @@ class Gameboard : public Fl_Group{
     Vector logic_to_screen(const Vector& logic_pos,double view_left, double view_top) const ;
     std::vector<Vector> get_terrain();
 
-    void set_character(const std::unique_ptr<Fl_PNG_Image>* p) noexcept
+    void set_character(const std::unique_ptr<RotatableCharacter>* p) noexcept
     {
-        m_img_character = p;
+        m_character = p;
+        // m_img_character = p;
+        // m_character.image(p->get());
+        // m_character.set_image_from_fl_image(p->get());
+        
 		// m_character.image(m_img_character->get());
     }
     void set_snow(const std::unique_ptr<Fl_PNG_Image>* p) noexcept
@@ -57,6 +62,7 @@ class Gameboard : public Fl_Group{
 
     private:
     // Fl_Box m_character;
+    const std::unique_ptr<RotatableCharacter>* m_character;
     private:
     std::vector<Vector> terrain_line;
 

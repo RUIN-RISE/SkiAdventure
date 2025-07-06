@@ -6,6 +6,7 @@ add_executable(SkiAdventure main.cpp
     common/Angle.cpp
     common/Vector.cpp
 	common/Timer.cpp
+	common/Rotator.cpp
 	model/Model.cpp
 	viewmodel/commands/NextStepCommand.cpp
 	viewmodel/commands/JumpCommand.cpp
@@ -21,6 +22,7 @@ set_target_properties(SkiAdventure PROPERTIES
 	WIN32_EXECUTABLE TRUE)
 
 target_link_libraries(SkiAdventure PRIVATE fltk fltk_images)
+target_include_directories(SkiAdventure PRIVATE ${Stb_INCLUDE_DIR})
 
 set(assets_path_list "${CMAKE_CURRENT_BINARY_DIR}/Debug/assets"
 	"${CMAKE_CURRENT_BINARY_DIR}/Release/assets")

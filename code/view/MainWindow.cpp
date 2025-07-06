@@ -1,10 +1,10 @@
 #include "../common/property_ids.h"
 #include "MainWindow.h"
 
-#define BOARD_X (5)
-#define BOARD_Y (5)
-#define BOARD_W (width-5-5)
-#define BOARD_H (height-50-BOARD_Y)
+#define BOARD_X (0)
+#define BOARD_Y (0)
+#define BOARD_W (width)
+#define BOARD_H (height-50)
 MainWindow::MainWindow(int height,int width, const char* title)
 : Fl_Double_Window(width,height,title),board(BOARD_X,BOARD_Y,BOARD_W,BOARD_H)
 {

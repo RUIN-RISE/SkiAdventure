@@ -11,7 +11,7 @@ bool SpiritViewModel::initialize()
 	if (str.back() != '/' && str.back() != '\\')
 		str += '/';
 	str += "code/assets/";
-	m_player = std::make_unique<Fl_PNG_Image>((str + "player.png").c_str());
+	m_player = std::make_unique<RotatableCharacter>(0,0,100,90,(str + "player.png").c_str());
 	if (m_player->fail())
 		return false;
 
