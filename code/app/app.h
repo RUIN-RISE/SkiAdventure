@@ -4,7 +4,7 @@
 #include "../viewmodel/GameViewModel.h"
 #include "../viewmodel/SpiritViewModel.h"
 #include "../view/MainWindow.h"
-#include "../view/StartScreen.h"
+#include "../view/widgets/StartScreen.h"
 
 class App {
 public:
@@ -23,7 +23,6 @@ public:
 
 private:
 	MainWindow m_main_wnd;
-	StartScreen m_start_screen;
 	GameViewModel m_game_viewmodel;
 	SpiritViewModel m_spirit_viewmodel;
 };

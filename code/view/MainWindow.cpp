@@ -6,12 +6,27 @@
 #define BOARD_W (width)
 #define BOARD_H (height-50)
 MainWindow::MainWindow(int height,int width, const char* title)
-: Fl_Double_Window(width,height,title),board(BOARD_X,BOARD_Y,BOARD_W,BOARD_H)
+: Fl_Double_Window(width,height,title),board(BOARD_X,BOARD_Y,BOARD_W,BOARD_H),
+  startscreen(BOARD_X,BOARD_Y,BOARD_W,BOARD_H)
 {
 	std::cerr << "Ctor Of MainWindow" << std::endl ;
 	begin();
-	add(board);
+	add(startscreen);
     end();
+
+	board.hide();
+	startscreen.set_start_game_callback([this]() {
+		std::cerr<< "Start Game button pressed!" << std::endl;
+		this->startscreen.hide();
+		if (!this->find(this->board.window())){
+		 this->add(this->board);
+		 std::cerr << "GameBoard added to MainWindow." << std::endl;
+		}
+		this->board.show();
+
+		this->redraw();
+
+	});
     //开始定时器，每秒刷新60次
     Fl::add_timeout(deltaTime, &timeout_cb, this);
 

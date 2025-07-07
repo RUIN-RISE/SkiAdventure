@@ -1,7 +1,6 @@
-#include "App.h"
+#include "app.h"
 
-App::App() : m_main_wnd(700,1200 , "Ski Adventure"), 	
-			 m_start_screen(700,1200,"Welcome to ski safari!")
+App::App() : m_main_wnd(700,1200 , "Ski Adventure")
 {}
 
 bool App::initialize(){
@@ -23,7 +22,7 @@ bool App::initialize(){
 	m_main_wnd.get_board().set_penguin(m_spirit_viewmodel.get_penguin());
 	m_main_wnd.get_board().set_background(m_spirit_viewmodel.get_background());
 
-	m_start_screen.set_start_image(m_spirit_viewmodel.get_start_image());
+	m_main_wnd.get_startscreen().set_start_image(m_spirit_viewmodel.get_start_image());
 
 	//commands
 	m_main_wnd.set_next_step_command(m_game_viewmodel.get_next_step_command());

@@ -3,6 +3,7 @@
 
 #include"../common/frame.h"
 #include "widgets/GameBoard.h"
+#include "widgets/StartScreen.h"
 
 class MainWindow :public Fl_Double_Window
 {
@@ -32,6 +33,11 @@ class MainWindow :public Fl_Double_Window
 	{
 		return board;
 	}
+
+    StartScreen& get_startscreen() noexcept
+    {
+        return startscreen;
+    }
     protected:
     //callbacks
 	static void timeout_cb(void*);
@@ -39,6 +45,7 @@ class MainWindow :public Fl_Double_Window
 
     private:
 	Gameboard board;
+    StartScreen startscreen;
 
     private:
     std::function<void(int)> m_next_step_command;

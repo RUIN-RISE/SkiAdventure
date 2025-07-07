@@ -1,22 +1,25 @@
 #pragma once
+#include"GameBoard.h"
 
-#include"MainWindow.h"
-#include<memory>
+class StartScreen : public Fl_Group{
+    private:
+    typedef Fl_Group BaseClass;
 
-class StartScreen : public Fl_Window{
     public:
-    StartScreen(int w,int h,const char* title);
+    StartScreen(int x,int y,int w,int h,const char *l = nullptr);
     ~StartScreen();
-
-    void setMainWindow(MainWindow *main_win)
-    {
-        mainWindow = main_win;
-    }
 
     void set_start_image(const std::unique_ptr<Fl_PNG_Image>* p) noexcept
     {
         start_image = p;
     }
+
+    void set_start_game_callback(std::function<void()>&& cb){
+        m_start_game_callback = std::move(cb);
+    }
+
+    protected:
+    void draw() override;
 
     private :
     static void startButton_cb(Fl_Widget* w, void *user_data);
@@ -28,6 +31,5 @@ class StartScreen : public Fl_Window{
     Fl_Box* Title_box;
     const std::unique_ptr<Fl_PNG_Image>* start_image;
 
-    MainWindow* mainWindow;
-
+    std::function<void()> m_start_game_callback;
 };

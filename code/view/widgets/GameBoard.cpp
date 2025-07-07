@@ -12,7 +12,9 @@ Gameboard::Gameboard(int x, int y, int w, int h, const char *l):
     // m_character(x+w/2,y+h/2,75,75,nullptr),
     map_width(w),
     map_height(h)
+
 {
+
     // std::cerr << "Gameboard Created" << std::endl;
     // std::cerr << x << ' ' << y << ' ' << w << ' ' << h << ' ' << std::endl;
     end();
@@ -111,53 +113,6 @@ void Gameboard::draw()
     fl_rectf(x(),y(),w(),h(),FL_CYAN);
     }
     std::vector<Vector> terrain_line = get_terrain();
-
-/*    int band_height = 50;  // 每条带的高度（可调）
-int num_bands = h() / band_height;
-
-// 顶部白色
-int r_top = 255, g_top = 255, b_top = 255;
-// 底部冷蓝色
-int r_bottom = 100, g_bottom = 150, b_bottom = 255;
-
-for (int i = 0; i < num_bands; ++i) {
-    double t = static_cast<double>(i) / (num_bands - 1);
-    int r = static_cast<int>(r_top * (1 - t) + r_bottom * t);
-    int g = static_cast<int>(g_top * (1 - t) + g_bottom * t);
-    int b = static_cast<int>(b_top * (1 - t) + b_bottom * t);
-    fl_color(fl_rgb_color(r, g, b));
-    
-    int y_band = y() + i * band_height;
-    fl_rectf(x(), y_band, w(), band_height);
-}
-std::vector<double> snow_top_y(w(), screen_height); // 存每个 x 像素对应雪坡顶部 y 坐标，初始为最底部
-
-// Step 1: 记录雪坡顶部轮廓
-for (const auto& point : terrain_line) {
-    Vector screen_point = logic_to_screen(point, view_left, view_top);
-    int x_pos = static_cast<int>(x() + screen_point.x);
-    int y_pos = static_cast<int>(y() + screen_point.y);
-    if (x_pos >= 0 && x_pos < w()) {
-        snow_top_y[x_pos] = std::min(snow_top_y[x_pos], static_cast<double>(y_pos));
-    }
-}
-
-// Step 2: 按条带渐变填充雪坡区域
-for (int y_band = 0; y_band < h(); y_band += band_height) {
-    double t = static_cast<double>(y_band) / h();  // 渐变比例
-    int r = static_cast<int>(255 * (1 - t) + 100 * t);
-    int g = static_cast<int>(255 * (1 - t) + 150 * t);
-    int b = static_cast<int>(255 * (1 - t) + 255 * t);
-    fl_color(fl_rgb_color(r, g, b));
-
-    for (int x_pos = 0; x_pos < w(); ++x_pos) {
-        if (y_band >= snow_top_y[x_pos]) {  // 雪坡区域内才填充
-            fl_rectf(x() + x_pos, y() + y_band, 1, band_height);
-        }
-    }
-}
-*/
-
     if(!terrain_line.empty() && snow && *snow)
     {
         // std::cerr << "Start TO Draw with Player: : " << character_position->x << std::endl ;
@@ -226,11 +181,21 @@ for (int y_band = 0; y_band < h(); y_band += band_height) {
 
     std::cerr << "center x,y : " << centerX << ' ' << centerY << std::endl;
 
-    // if(m_img_character && *m_img_character)
-    // {
-    //     int charX = centerX - (*m_img_character)->w()/2;
-    //     int charY = centerY - (*m_img_character)->w()/2;
-    //     (*m_img_character)->draw(charX,charY);
-    // }
-    // BaseClass::draw_children();
+    int box_width = 150;
+    int box_height = 40;
+    int box_x = x() + w() - 230;
+    int box_y = y() + 50;
+
+    fl_color(fl_rgb_color(150,200,250)); 
+
+    fl_font(FL_HELVETICA_BOLD, 15); 
+
+    char ch_y_str[64];
+
+     snprintf(ch_y_str, sizeof(ch_y_str), "Player Distance: %.2fm", ch_x/100);
+
+    int text_width, text_height;
+    fl_measure(ch_y_str, text_width, text_height, 0);
+    fl_draw(ch_y_str, box_x + (box_width - text_width) / 2, box_y + (box_height - text_height) / 2 + fl_descent());
+
 }
