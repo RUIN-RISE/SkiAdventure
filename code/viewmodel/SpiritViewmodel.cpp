@@ -15,6 +15,11 @@ bool SpiritViewModel::initialize()
 	if (m_player->fail())
 		return false;
 
+	//合成了一下变成宽99了
+	m_player_penguin = std::make_unique<RotatableCharacter>(0,0,99,90,(str + "player_penguin.png").c_str());
+	if (m_player_penguin->fail())
+		return false;
+
 	m_snow = std::make_unique<Fl_PNG_Image>((str + "snow.png").c_str());
 	if (m_snow->fail())
 		return false;

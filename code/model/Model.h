@@ -5,14 +5,10 @@
 #include "../common/PhysicsEntity.h"
 #include "../common/Timer.h"
 
+const double vec_lim_x = 5000;
+
 class SnowCurve : public Curve{
 	public:
-		const double &get_stone() const {
-			return stone ;
-		}
-		void set_stone(const double &s) {
-			stone = s;
-		}
 		SnowCurve(): Curve(
 			std::vector<Vector>{
 				Vector(2000,-400),
@@ -24,12 +20,28 @@ class SnowCurve : public Curve{
 			}
 		), stone(-2000){
 			srand(time(0));
+			slide = -3000 ;
 		}
+		
+		const double &get_stone() const {
+			return stone ;
+		}
+		void set_stone(const double &s) {
+			stone = s;
+		}
+
+		const double &get_slide() const {
+			return slide ;
+		}
+
 		void reset(){
 			stone = -2000 ;
+			slide = -3000 ;
 		}
+		void update_slide();
 	private:
 		double stone; // the x of stone
+		double slide; // 雪崩的 x 坐标
 };
 
 class PlayerModel : public PhysicsEntity{
@@ -49,19 +61,40 @@ class PlayerModel : public PhysicsEntity{
 		void jump(SnowCurve *SC);
 		void reset();
 
-		void set_penguin(bool p){
-			Penguin_ = p;
-		}
-		bool get_penguin(){
+		void set_penguin(bool p);
+		const bool &get_penguin() const {
 			return Penguin_ ;
 		}
+
+		bool is_dizzy() const {
+			return dizzy ;
+		}
+
 	private:
 		void update_onCurve(SnowCurve *SC);
 		void update_offCurve(SnowCurve *SC);
 		void get_dizzy();
+
+		void speed_bonus(){
+			Vector curVel = this->getVelocity() ;
+			curVel += Vector(1000,0);
+
+			//限速，否则速度太快渲染不动（
+			if(curVel.x >= vec_lim_x)
+				curVel.x = vec_lim_x;
+			this->setVelocity(curVel);
+		}
+		void speed_penalty(){
+			Vector curVel = this->getVelocity() ;
+			curVel *= 0.8;
+			this->setVelocity(curVel);
+		}
+
 		Timer dizzy_time;
 		bool dizzy;
 		bool Penguin_ ;
+
+		int cycles;
 };
 
 #endif

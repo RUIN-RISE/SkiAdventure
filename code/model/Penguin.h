@@ -15,7 +15,7 @@ class PenguinModel : public PhysicsEntity {
 		){
 
 		}
-		void update_penguin(SnowCurve *SC,double px);
+		void update_penguin(SnowCurve *SC,PlayerModel *plm);
 		void update_onCurve(SnowCurve *SC);
 		void reset(SnowCurve *SC,double px);
 };
