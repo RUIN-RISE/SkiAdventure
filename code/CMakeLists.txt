@@ -8,6 +8,7 @@ add_executable(SkiAdventure main.cpp
 	common/Timer.cpp
 	common/Rotator.cpp
 	model/Model.cpp
+	model/Penguin.cpp
 	viewmodel/commands/NextStepCommand.cpp
 	viewmodel/commands/JumpCommand.cpp
 	viewmodel/commands/StartCommand.cpp

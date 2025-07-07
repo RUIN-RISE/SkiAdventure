@@ -210,6 +210,13 @@ for (int y_band = 0; y_band < h(); y_band += band_height) {
         draw_img(screen_point.x,screen_point.y,m_img_stone);
     }
 
+    int penguin_width = (*m_img_penguin)->w();
+    double penguin_pos = penguin->getPosition().x;
+    if(penguin_pos >= view_left-(penguin_width/2) && penguin_pos <= view_right+(penguin_width/2)){
+        Vector screen_point = logic_to_screen(penguin->getPosition(),view_left,view_top);
+        draw_img(screen_point.x,screen_point.y,m_img_penguin);
+    }
+
     // draw_img(x() + w()/2 , y() + h()/2,m_img_character);
     int centerX = x() + w()/2 ;
     int centerY = y() + h()/2 ;

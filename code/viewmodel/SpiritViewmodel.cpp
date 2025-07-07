@@ -23,6 +23,10 @@ bool SpiritViewModel::initialize()
 	if (m_stone->fail())
 		return false;
 
+	m_penguin = std::make_unique<Fl_PNG_Image>((str + "penguin.png").c_str());
+	if (m_penguin->fail())
+		return false;
+
 	m_background = std::make_unique<Fl_PNG_Image>((str + "background.png").c_str());
 	if (m_background->fail())
 		return false;

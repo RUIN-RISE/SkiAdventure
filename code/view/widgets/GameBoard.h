@@ -27,6 +27,9 @@ class Gameboard : public Fl_Group{
     void set_player_instance(const PhysicsEntity* pl) noexcept {
         character = pl ;
     }
+    void set_penguin_instance(const PhysicsEntity* pg) noexcept {
+        penguin = pg ;
+    }
 
     Vector logic_to_screen(const Vector& logic_pos,double view_left, double view_top) const ;
     std::vector<Vector> get_terrain();
@@ -47,6 +50,10 @@ class Gameboard : public Fl_Group{
     void set_stone(const std::unique_ptr<Fl_PNG_Image>* p) noexcept
     {
         m_img_stone = p;
+    }
+    void set_penguin(const std::unique_ptr<Fl_PNG_Image>* p) noexcept
+    {
+        m_img_penguin = p;
     }
     void set_background(const std::unique_ptr<Fl_PNG_Image>* p) noexcept
     {
@@ -69,10 +76,12 @@ class Gameboard : public Fl_Group{
     const std::unique_ptr<Fl_PNG_Image>* m_img_character;
     const std::unique_ptr<Fl_PNG_Image>* snow;
     const std::unique_ptr<Fl_PNG_Image>* m_img_stone;
+    const std::unique_ptr<Fl_PNG_Image>* m_img_penguin;
     const std::unique_ptr<Fl_PNG_Image>* background;
 
     // const Vector* character_position;
     const PhysicsEntity* character;
+    const PhysicsEntity* penguin;
     int map_width,map_height;
     const Curve* game_curve = nullptr;
 

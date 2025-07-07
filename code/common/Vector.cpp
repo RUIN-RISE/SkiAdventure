@@ -73,3 +73,9 @@ Angle Vector::angle() const {
 Vector Vector::orthogonal() const {
     return Vector(-y, x);
 }
+
+double dist(const Vector &a,const Vector &b){
+	double ax = a.x,ay = a.y;
+	double bx = b.x,by = b.y;
+	return sqrt((ax-bx)*(ax-bx) + (ay-by)*(ay-by));
+}
