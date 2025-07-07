@@ -43,6 +43,10 @@ class Gameboard : public Fl_Group{
         
 		// m_character.image(m_img_character->get());
     }
+    void set_character_penguin(const std::unique_ptr<RotatableCharacter>* p) noexcept
+    {
+        m_character_penguin = p;
+    }
     void set_snow(const std::unique_ptr<Fl_PNG_Image>* p) noexcept
     {
         snow = p;
@@ -63,6 +67,9 @@ class Gameboard : public Fl_Group{
     void set_stone_pos(const double *sp){
         stone_pos = sp;
     }
+    void set_penguin_on(const bool *po){
+        penguin_on = po;
+    }
 
     protected:
     void draw() override;
@@ -70,10 +77,11 @@ class Gameboard : public Fl_Group{
     private:
     // Fl_Box m_character;
     const std::unique_ptr<RotatableCharacter>* m_character;
+    const std::unique_ptr<RotatableCharacter>* m_character_penguin;
     private:
     std::vector<Vector> terrain_line;
 
-    const std::unique_ptr<Fl_PNG_Image>* m_img_character;
+    // const std::unique_ptr<Fl_PNG_Image>* m_img_character;
     const std::unique_ptr<Fl_PNG_Image>* snow;
     const std::unique_ptr<Fl_PNG_Image>* m_img_stone;
     const std::unique_ptr<Fl_PNG_Image>* m_img_penguin;
@@ -86,4 +94,5 @@ class Gameboard : public Fl_Group{
     const Curve* game_curve = nullptr;
 
     const double *stone_pos;
+    const bool *penguin_on ;
 };

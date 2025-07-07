@@ -1,10 +1,5 @@
 #include "GameBoard.h"
 
-// #define BOX_PLANE_X  (x + 10)
-// #define BOX_PLANE_Y  (y + 10)
-// #define BOX_PLANE_W  (90)
-// #define BOX_PLANE_H  (90)
-
 Gameboard::Gameboard(int x, int y, int w, int h, const char *l): 
     // BaseClass(x,w,y,h,l),
     BaseClass(x,y,w,h,l),
@@ -84,7 +79,8 @@ void draw_img(int centerX,int centerY,const std::unique_ptr<Fl_PNG_Image> * m_im
     }
 }
 
-
+#define pl_show (*penguin_on?m_character_penguin:m_character)
+#define pl_hide (*penguin_on?m_character:m_character_penguin)
 
 void Gameboard::draw()
 {
@@ -218,13 +214,16 @@ for (int y_band = 0; y_band < h(); y_band += band_height) {
     }
 
     // draw_img(x() + w()/2 , y() + h()/2,m_img_character);
+
+    pl_hide->get()->hide();
+
     int centerX = x() + w()/2 ;
     int centerY = y() + h()/2 ;
-    m_character->get()->position(centerX,centerY);
-    m_character->get()->set_angle(-this->character->getAngle().deg()); //由于旋转的实现：逆时针为负方向，与常规意义相反，故此处取反
-    m_character->get()->draw();
+    pl_show->get()->position(centerX,centerY);
+    pl_show->get()->set_angle(-this->character->getAngle().deg()); //由于旋转的实现：逆时针为负方向，与常规意义相反，故此处取反
+    pl_show->get()->draw();
 
-    std::cerr << "center x,y : " << centerX << ' ' << centerY << std::endl;
+    // std::cerr << "center x,y : " << centerX << ' ' << centerY << std::endl;
 
     // if(m_img_character && *m_img_character)
     // {

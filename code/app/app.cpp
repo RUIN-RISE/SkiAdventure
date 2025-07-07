@@ -15,10 +15,12 @@ bool App::initialize(){
     // m_main_wnd.get_board().set_character_position(m_game_viewmodel.getPlayerPosition());
 	m_main_wnd.get_board().set_player_instance(m_game_viewmodel.getPlayerInstance());
 	m_main_wnd.get_board().set_stone_pos(m_game_viewmodel.getStonePosition());
+	m_main_wnd.get_board().set_penguin_on(m_game_viewmodel.getPenguinOn());
 	m_main_wnd.get_board().set_penguin_instance(m_game_viewmodel.getPenguinInstance());
 
 	m_main_wnd.get_board().set_snow(m_spirit_viewmodel.get_snow());
 	m_main_wnd.get_board().set_character(m_spirit_viewmodel.get_player());
+	m_main_wnd.get_board().set_character_penguin(m_spirit_viewmodel.get_player_penguin());
 	m_main_wnd.get_board().set_stone(m_spirit_viewmodel.get_stone());
 	m_main_wnd.get_board().set_penguin(m_spirit_viewmodel.get_penguin());
 	m_main_wnd.get_board().set_background(m_spirit_viewmodel.get_background());

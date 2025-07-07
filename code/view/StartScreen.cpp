@@ -12,13 +12,13 @@ StartScreen::StartScreen(int w,int h, const char *title)
     Title_box->labelcolor(FL_WHITE);
     Title_box->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE);
 
-    startButton = new Fl_Button(w/2-100,h/2,200,50,"开始游戏");
+    startButton = new Fl_Button(w/2-100,h/2,200,50,"Start Game");
     startButton->labelsize(FL_NORMAL_SIZE + 5);
     startButton->labelcolor(FL_BLACK);
     startButton->color(FL_WHITE);
     startButton->callback(startButton_cb,this);
 
-    exitButton = new Fl_Button(w / 2 - 100, h / 2 + 70 , 200, 50, "退出游戏");
+    exitButton = new Fl_Button(w / 2 - 100, h / 2 + 70 , 200, 50, "End Game");
     exitButton->labelsize(FL_NORMAL_SIZE + 5);
     exitButton->labelcolor(FL_BLACK);
     exitButton->color(FL_WHITE);

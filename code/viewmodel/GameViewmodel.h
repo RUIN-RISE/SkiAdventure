@@ -33,6 +33,9 @@ public:
 	const double* getStonePosition() const {
 		return &FullCurve.get_stone();
 	}
+	const bool* getPenguinOn() const {
+		return &plm.get_penguin();
+	}
 
 //commands
 	std::function<void(int)> get_next_step_command();
