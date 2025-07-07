@@ -15,6 +15,7 @@ add_executable(SkiAdventure main.cpp
 	viewmodel/SpiritViewModel.cpp
 	view/widgets/GameBoard.cpp
 	view/MainWindow.cpp
+	view/StartScreen.cpp
 	app/app.cpp)
 
 target_precompile_headers(SkiAdventure PRIVATE precomp.h)

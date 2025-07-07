@@ -1,6 +1,8 @@
 #include "App.h"
 
-App::App() : m_main_wnd(700,1200 , "Ski Adventure") {}
+App::App() : m_main_wnd(700,1200 , "Ski Adventure"), 	
+			 m_start_screen(700,1200,"Welcome to ski safari!")
+{}
 
 bool App::initialize(){
 	if (!m_spirit_viewmodel.initialize())
@@ -18,6 +20,8 @@ bool App::initialize(){
 	m_main_wnd.get_board().set_character(m_spirit_viewmodel.get_player());
 	m_main_wnd.get_board().set_stone(m_spirit_viewmodel.get_stone());
 	m_main_wnd.get_board().set_background(m_spirit_viewmodel.get_background());
+
+	m_start_screen.set_start_image(m_spirit_viewmodel.get_start_image());
 
 	//commands
 	m_main_wnd.set_next_step_command(m_game_viewmodel.get_next_step_command());

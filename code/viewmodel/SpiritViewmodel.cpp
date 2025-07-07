@@ -26,5 +26,9 @@ bool SpiritViewModel::initialize()
 	m_background = std::make_unique<Fl_PNG_Image>((str + "background.png").c_str());
 	if (m_background->fail())
 		return false;
+
+	m_start_image = std::make_unique<Fl_PNG_Image>((str + "background.png").c_str());
+	if (m_start_image->fail())
+	return false;
 	return true;
 }

@@ -28,6 +28,7 @@ const double deltaTime = 1.0/60 ;
 
 #include <FL/filename.H>
 #include <FL/fl_draw.H>
+#include <FL/Fl_Button.H>
 
 #include <FL/fl_ask.H>
 

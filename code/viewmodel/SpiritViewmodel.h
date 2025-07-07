@@ -34,6 +34,10 @@ public:
 	{
 		return &m_background;
 	}
+	const std::unique_ptr<Fl_PNG_Image>* get_start_image() const noexcept
+	{
+		return &m_start_image;
+	}
 //methods
 	bool initialize();
 
@@ -44,6 +48,7 @@ private:
 	std::unique_ptr<Fl_PNG_Image> m_snow;
 	std::unique_ptr<Fl_PNG_Image> m_stone;
 	std::unique_ptr<Fl_PNG_Image> m_background;
+	std::unique_ptr<Fl_PNG_Image> m_start_image;
 };
 
 #endif
