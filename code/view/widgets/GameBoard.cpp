@@ -214,6 +214,7 @@ for (int y_band = 0; y_band < h(); y_band += band_height) {
     }
 
     // draw_img(x() + w()/2 , y() + h()/2,m_img_character);
+    std::cerr << "Slide : " << *slide_pos << std::endl ;
 
     pl_hide->get()->hide();
 

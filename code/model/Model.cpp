@@ -4,14 +4,17 @@ const int offset = 1500 ;
 const double alpha = 0.99 ;
 const double Vec_lim_in_air = 6500 ;
 
-const double eps = 50.0 ;
+const double eps = 40.0 ;
 const double DizzyTime = 2.0 ;
 
-// double dist(const Vector &a,const Vector &b){
-// 	double ax = a.x,ay = a.y;
-// 	double bx = b.x,by = b.y;
-// 	return sqrt((ax-bx)*(ax-bx) + (ay-by)*(ay-by));
-// }
+void SnowCurve::update_slide(){
+	double slide_vel = 500.0 ;
+	if(slide > 5000) slide_vel += 1000.0 ;
+	if(slide >15000) slide_vel += 1000.0 ;
+	if(slide >25000) slide_vel += 1000.0 ;
+
+	slide += slide_vel * deltaTime ;
+}
 
 void PlayerModel::get_dizzy(){
 	if(Penguin_){
@@ -114,8 +117,12 @@ void PlayerModel::update_offCurve(SnowCurve *SC){
 
 		this->setAngle(Angle());
 
+		Vector unit_scope = SC->tangent(ox);
+		unit_scope.normalize();
+		Vector CurveVel = unit_scope*(this->getVelocity()*unit_scope);
+		this->setVelocity(CurveVel - unit_scope * 5); // friction
 		/*
-		下一帧再更新速度
+		本来想下一帧再更新速度，但是我意识到有可能下一帧又飞出去了
 		*/
 	}
 	else{
@@ -160,7 +167,7 @@ void PlayerModel::jump(SnowCurve *SC){
 	Vector ov = this->getVelocity();
 	double ox = this->getPosition().x;
 	Vector normal = SC->tangent(ox).orthogonal();
-	ov += normal * 800;
+	ov += normal * 750;
 	this->setVelocity(ov);
 }
 

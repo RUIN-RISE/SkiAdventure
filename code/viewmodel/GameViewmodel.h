@@ -33,6 +33,9 @@ public:
 	const double* getStonePosition() const {
 		return &FullCurve.get_stone();
 	}
+	const double* getSlidePosition() const {
+		return &FullCurve.get_slide();
+	}
 	const bool* getPenguinOn() const {
 		return &plm.get_penguin();
 	}

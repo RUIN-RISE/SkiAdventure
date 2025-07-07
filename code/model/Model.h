@@ -9,12 +9,6 @@ const double vec_lim_x = 5000;
 
 class SnowCurve : public Curve{
 	public:
-		const double &get_stone() const {
-			return stone ;
-		}
-		void set_stone(const double &s) {
-			stone = s;
-		}
 		SnowCurve(): Curve(
 			std::vector<Vector>{
 				Vector(2000,-400),
@@ -26,12 +20,28 @@ class SnowCurve : public Curve{
 			}
 		), stone(-2000){
 			srand(time(0));
+			slide = -3000 ;
 		}
+		
+		const double &get_stone() const {
+			return stone ;
+		}
+		void set_stone(const double &s) {
+			stone = s;
+		}
+
+		const double &get_slide() const {
+			return slide ;
+		}
+
 		void reset(){
 			stone = -2000 ;
+			slide = -3000 ;
 		}
+		void update_slide();
 	private:
 		double stone; // the x of stone
+		double slide; // 雪崩的 x 坐标
 };
 
 class PlayerModel : public PhysicsEntity{

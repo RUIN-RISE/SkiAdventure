@@ -67,6 +67,9 @@ class Gameboard : public Fl_Group{
     void set_stone_pos(const double *sp){
         stone_pos = sp;
     }
+    void set_slide_pos(const double *sp){
+        slide_pos = sp;
+    }
     void set_penguin_on(const bool *po){
         penguin_on = po;
     }
@@ -94,5 +97,6 @@ class Gameboard : public Fl_Group{
     const Curve* game_curve = nullptr;
 
     const double *stone_pos;
+    const double *slide_pos;
     const bool *penguin_on ;
 };

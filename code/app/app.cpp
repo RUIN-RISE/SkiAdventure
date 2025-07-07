@@ -16,6 +16,7 @@ bool App::initialize(){
 	m_main_wnd.get_board().set_player_instance(m_game_viewmodel.getPlayerInstance());
 	m_main_wnd.get_board().set_stone_pos(m_game_viewmodel.getStonePosition());
 	m_main_wnd.get_board().set_penguin_on(m_game_viewmodel.getPenguinOn());
+	m_main_wnd.get_board().set_slide_pos(m_game_viewmodel.getSlidePosition());
 	m_main_wnd.get_board().set_penguin_instance(m_game_viewmodel.getPenguinInstance());
 
 	m_main_wnd.get_board().set_snow(m_spirit_viewmodel.get_snow());

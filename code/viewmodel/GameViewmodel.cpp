@@ -16,6 +16,7 @@ void GameViewModel::next_step(int turn)
 	if(GameStatus == 0) return ;
 	this->plm.update_game(&this->FullCurve);
 	this->pgm.update_penguin(&this->FullCurve,&this->plm);
+	this->FullCurve.update_slide();
 	fire(PROP_ID_MAP);
 }
 
