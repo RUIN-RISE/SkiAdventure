@@ -74,6 +74,8 @@ void PlayerModel::update_onCurve(SnowCurve *SC){
 	unit_scope.normalize();
 	Vector CurveVel = unit_scope*(this->getVelocity()*unit_scope);
 	this->setVelocity(CurveVel - unit_scope * 5); // friction
+
+	this->setAngle(this->getVelocity().angle());
 }
 
 const double delta_theta = 8.0 ;

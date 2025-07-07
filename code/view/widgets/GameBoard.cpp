@@ -169,7 +169,36 @@ void Gameboard::draw()
     }
 
     // draw_img(x() + w()/2 , y() + h()/2,m_img_character);
-    std::cerr << "Slide : " << *slide_pos << std::endl ;
+    std::cerr << "Slide : " << *slide_pos << "  Player : "<<character->getPosition().x<<std::endl ;
+    if (!terrain_line.empty() && slide_pos) {
+        fl_color(FL_WHITE);
+
+        fl_begin_complex_polygon();
+
+        // draw bottom edge of terrain line
+        for (const auto& point : terrain_line) {
+            if (point.x > *slide_pos) break;
+
+            Vector screen_point = logic_to_screen(point, view_left, view_top);
+            fl_vertex(x() + screen_point.x, y() + screen_point.y);
+        }
+
+        for (auto it = terrain_line.rbegin(); it != terrain_line.rend(); ++it) {
+            if (it->x > *slide_pos) continue;
+
+            Vector screen_point = logic_to_screen(*it, view_left, view_top);
+            double height = 200, r = 100, w = 30, delta = (*slide_pos - w) - it->x;
+            // draw a slope with width w
+            if(delta < 0)
+                height = (height - r) * (*slide_pos - it->x)/w;
+            // draw a round corner with radius r
+            if(0<delta && delta < r)
+                height -= r - sqrt(r*r - (r-delta)*(r-delta));
+            fl_vertex(x() + screen_point.x, y() + screen_point.y - height);
+        }
+
+        fl_end_complex_polygon();
+    }
 
     pl_hide->get()->hide();
 
