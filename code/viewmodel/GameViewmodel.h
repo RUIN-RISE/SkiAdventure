@@ -3,7 +3,7 @@
 
 #include "../common/frame.h"
 #include "../model/Model.h"
-
+#include "../model/Penguin.h"
 
 class GameViewModel : public PropertyTrigger
 {
@@ -26,6 +26,9 @@ public:
 	const PhysicsEntity* getPlayerInstance() const {
 		return &plm;
 	}
+	const PhysicsEntity* getPenguinInstance() const {
+		return &pgm;
+	}
 
 	const double* getStonePosition() const {
 		return &FullCurve.get_stone();
@@ -45,6 +48,7 @@ private:
 //properties
 	SnowCurve FullCurve;
 	PlayerModel plm;
+	PenguinModel pgm;
 	int GameStatus; // 0->stop(wait to start)
 };
 

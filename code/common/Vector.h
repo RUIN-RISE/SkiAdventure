@@ -44,4 +44,6 @@ public:
     Vector orthogonal() const;
 };
 
+double dist(const Vector &a,const Vector &b);
+
 #endif

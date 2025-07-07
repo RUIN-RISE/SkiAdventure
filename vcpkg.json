@@ -1,7 +1,5 @@
 {
   "dependencies": [
-    "fltk",
-	"stb",
-	"freeimage"
+    "fltk"
   ]
 }

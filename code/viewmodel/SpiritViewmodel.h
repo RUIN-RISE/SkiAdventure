@@ -30,6 +30,10 @@ public:
 	{
 		return &m_stone;
 	}
+	const std::unique_ptr<Fl_PNG_Image>* get_penguin() const noexcept
+	{
+		return &m_penguin;
+	}
 	const std::unique_ptr<Fl_PNG_Image>* get_background() const noexcept
 	{
 		return &m_background;
@@ -43,6 +47,7 @@ private:
 	std::unique_ptr<RotatableCharacter> m_player;
 	std::unique_ptr<Fl_PNG_Image> m_snow;
 	std::unique_ptr<Fl_PNG_Image> m_stone;
+	std::unique_ptr<Fl_PNG_Image> m_penguin;
 	std::unique_ptr<Fl_PNG_Image> m_background;
 };
 

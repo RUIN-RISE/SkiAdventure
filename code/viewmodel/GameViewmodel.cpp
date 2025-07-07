@@ -15,6 +15,7 @@ void GameViewModel::next_step(int turn)
 	// std::cerr << "next_step" << std::endl;
 	if(GameStatus == 0) return ;
 	this->plm.update_game(&this->FullCurve);
+	this->pgm.update_penguin(&this->FullCurve,this->plm.getPosition().x);
 	fire(PROP_ID_MAP);
 }
 
@@ -28,5 +29,6 @@ bool GameViewModel::start_game(){
 	GameStatus = 1;
 	this->plm.reset();
 	this->FullCurve.reset();
+	this->pgm.reset(&this->FullCurve,0);
 	return true ;
 }

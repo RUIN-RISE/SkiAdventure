@@ -53,7 +53,7 @@ bool PhysicsEntity::isOnCurve() const {
     return onCurve;
 }
 
-void PhysicsEntity::update(double deltaTime) {
-    position += velocity * deltaTime;
+void PhysicsEntity::update(double deltaTime,double k) {
+    position += velocity * deltaTime * k;
     velocity += acceleration * deltaTime;
 }

@@ -39,7 +39,7 @@ public:
     bool isOnCurve() const;
     
     // Update position/velocity based on velocity/acceleration
-    void update(double deltaTime);
+    void update(double deltaTime,double k = 1.0);
 
 private:
     Vector position;

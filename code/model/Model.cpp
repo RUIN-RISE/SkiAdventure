@@ -7,11 +7,11 @@ const double Vec_lim_in_air = 3500 ;
 const double eps = 50.0 ;
 const double DizzyTime = 2.0 ;
 
-double dist(const Vector &a,const Vector &b){
-	double ax = a.x,ay = a.y;
-	double bx = b.x,by = b.y;
-	return sqrt((ax-bx)*(ax-bx) + (ay-by)*(ay-by));
-}
+// double dist(const Vector &a,const Vector &b){
+// 	double ax = a.x,ay = a.y;
+// 	double bx = b.x,by = b.y;
+// 	return sqrt((ax-bx)*(ax-bx) + (ay-by)*(ay-by));
+// }
 
 void PlayerModel::get_dizzy(){
 	dizzy_time.reset() ;
@@ -52,13 +52,13 @@ void PlayerModel::update_game(SnowCurve *SC){
 }
 
 void PlayerModel::update_onCurve(SnowCurve *SC){
-	// std::cerr << "Old Player Position : " << this->getPosition().x << ' ' << this->getPosition().y << std::endl;
+	std::cerr << "Old Player Position : " << this->getPosition().x << ' ' << this->getPosition().y << std::endl;
 	double ox = this->getPosition().x; // old x
 	this->update(deltaTime);
 
 	double nx = this->getPosition().x; // new x
 	Vector CurvePos(nx,SC->evaluate(nx));
-	// std::cerr << "New Player Position : " << nx << ' ' << SC->evaluate(nx) << std::endl;
+	std::cerr << "New Player Position : " << nx << ' ' << SC->evaluate(nx) << std::endl;
 	this->setPosition(CurvePos);
 
 	Vector unit_scope = SC->tangent(ox);
@@ -138,4 +138,5 @@ void PlayerModel::reset(){
 	this->setVelocity(Vector(1000,0));
 	this->setOnCurve(true);
 	this->dizzy = false ;
+	this->Penguin_ = false ;
 }

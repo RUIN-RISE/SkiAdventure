@@ -1,3 +1,6 @@
+#ifndef __Model__H
+#define __Model__H
+
 #include "../common/Curve.h"
 #include "../common/PhysicsEntity.h"
 #include "../common/Timer.h"
@@ -40,14 +43,25 @@ class PlayerModel : public PhysicsEntity{
 		){
 			// setOnCurve(true);
 			dizzy = false ;
+			Penguin_ = false ;
 		}
 		void update_game(SnowCurve *SC);
 		void jump(SnowCurve *SC);
 		void reset();
+
+		void set_penguin(bool p){
+			Penguin_ = p;
+		}
+		bool get_penguin(){
+			return Penguin_ ;
+		}
 	private:
 		void update_onCurve(SnowCurve *SC);
 		void update_offCurve(SnowCurve *SC);
 		void get_dizzy();
 		Timer dizzy_time;
 		bool dizzy;
+		bool Penguin_ ;
 };
+
+#endif
