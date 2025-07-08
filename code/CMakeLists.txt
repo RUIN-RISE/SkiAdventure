@@ -25,16 +25,17 @@ set_target_properties(SkiAdventure PROPERTIES
 	WIN32_EXECUTABLE TRUE)
 
 target_link_libraries(SkiAdventure PRIVATE fltk fltk_images)
-target_include_directories(SkiAdventure PRIVATE ${Stb_INCLUDE_DIR})
 
 set(assets_path_list "${CMAKE_CURRENT_BINARY_DIR}/Debug/assets"
 	"${CMAKE_CURRENT_BINARY_DIR}/Release/assets")
 file(MAKE_DIRECTORY ${assets_path_list})
 foreach(assets_path ${assets_path_list})
-	file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/assets/player.png"
-		"${CMAKE_CURRENT_SOURCE_DIR}/assets/snow.png"
-		"${CMAKE_CURRENT_SOURCE_DIR}/assets/stone.png"
-		"${CMAKE_CURRENT_SOURCE_DIR}/assets/background.png"
+	file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/../assets/player.png"
+		"${CMAKE_CURRENT_SOURCE_DIR}/../assets/snow.png"
+		"${CMAKE_CURRENT_SOURCE_DIR}/../assets/stone.png"
+		"${CMAKE_CURRENT_SOURCE_DIR}/../assets/background.png"
+		"${CMAKE_CURRENT_SOURCE_DIR}/../assets/penguin.png"
+		"${CMAKE_CURRENT_SOURCE_DIR}/../assets/player_penguin.png"
 # 		"${CMAKE_CURRENT_SOURCE_DIR}/assets/plane_blue.png"
 		DESTINATION "${assets_path}")
 endforeach()
