@@ -126,6 +126,7 @@ void Gameboard::draw()
 
         fl_end_polygon();
     }
+    fl_push_clip(x(), y(), w(), h());
     if(!terrain_line.empty() && snow && *snow)
     {
         // std::cerr << "Start TO Draw with Player: : " << character_position->x << std::endl ;
@@ -152,7 +153,8 @@ void Gameboard::draw()
         //fl_vertex(x(),y()+h());
 
         //fl_end_polygon();
-        }
+    }
+    fl_pop_clip();
 
     int stone_width = (*m_img_stone)->w();
     if(*stone_pos >= view_left-(stone_width/2) && *stone_pos <= view_right+(stone_width/2)){
