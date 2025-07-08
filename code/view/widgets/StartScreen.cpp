@@ -9,8 +9,9 @@ StartScreen::StartScreen(int x,int y,int w,int h, const char *title)
 {
     show();
 
-    Title_box = new Fl_Box(0,h/6,w,h/8,"Ski Safari");
-    Title_box->labelsize(FL_NORMAL_SIZE + 15);
+    Title_box = new Fl_Box(0,h/6,w,h/8,"Ski Adventure");
+    Title_box->labelsize(FL_NORMAL_SIZE + 60);
+    Title_box->labelfont(FL_HELVETICA_ITALIC);
     Title_box->labelcolor(FL_WHITE);
     Title_box->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE);
 
