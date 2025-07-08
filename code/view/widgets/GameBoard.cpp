@@ -202,12 +202,17 @@ void Gameboard::draw()
 
     pl_hide->get()->hide();
 
-    int centerX = x() + w()/2 ;
-    int centerY = y() + h()/2 ;
-    pl_show->get()->position(centerX,centerY);
-    pl_show->get()->set_angle(-this->character->getAngle().deg()); //由于旋转的实现：逆时针为负方向，与常规意义相反，故此处取反
-    pl_show->get()->draw();
+    if(*game_status != 2){
+        int centerX = x() + w()/2 ;
+        int centerY = y() + h()/2 ;
+        pl_show->get()->position(centerX,centerY);
+        pl_show->get()->set_angle(-this->character->getAngle().deg()); //由于旋转的实现：逆时针为负方向，与常规意义相反，故此处取反
+        pl_show->get()->draw();        
+    }
 
+    if(*game_status == 2){
+        pl_show->get()->hide();
+    }
     // std::cerr << "center x,y : " << centerX << ' ' << centerY << std::endl;
 
     int box_width = 150;
@@ -221,10 +226,21 @@ void Gameboard::draw()
 
     char ch_y_str[64];
 
-     snprintf(ch_y_str, sizeof(ch_y_str), "Player Distance: %.2fm", ch_x/100);
+    snprintf(ch_y_str, sizeof(ch_y_str), "Player Distance: %.2fm", ch_x/100);
 
     int text_width, text_height;
     fl_measure(ch_y_str, text_width, text_height, 0);
     fl_draw(ch_y_str, box_x + (box_width - text_width) / 2, box_y + (box_height - text_height) / 2 + fl_descent());
 
+    ch_x = *slide_pos;
+    snprintf(ch_y_str, sizeof(ch_y_str), "Slide Distance: %.2fm", ch_x/100);
+    fl_measure(ch_y_str, text_width, text_height, 0);
+    fl_draw(ch_y_str, box_x + (box_width - text_width) / 2, box_y + (box_height - text_height) / 2 + fl_descent() + 20);
+
+    if(*game_status == 2){
+        snprintf(ch_y_str, sizeof(ch_y_str), "Game End");
+        fl_measure(ch_y_str, text_width, text_height, 0);
+        fl_draw(ch_y_str, box_x + (box_width - text_width) / 2, box_y + (box_height - text_height) / 2 + fl_descent() + 40);
+
+    }
 }

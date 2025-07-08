@@ -73,6 +73,9 @@ class Gameboard : public Fl_Group{
     void set_penguin_on(const bool *po){
         penguin_on = po;
     }
+    void set_game_status(const int *gs){
+        game_status = gs;
+    }
 
     protected:
     void draw() override;
@@ -99,4 +102,5 @@ class Gameboard : public Fl_Group{
     const double *stone_pos;
     const double *slide_pos;
     const bool *penguin_on ;
+    const int  *game_status;
 };

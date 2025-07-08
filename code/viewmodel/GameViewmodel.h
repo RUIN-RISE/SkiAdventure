@@ -39,6 +39,9 @@ public:
 	const bool* getPenguinOn() const {
 		return &plm.get_penguin();
 	}
+	const int* getGameStatus() const {
+		return &GameStatus;
+	}
 
 //commands
 	std::function<void(int)> get_next_step_command();

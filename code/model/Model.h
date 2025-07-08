@@ -38,7 +38,7 @@ class SnowCurve : public Curve{
 			stone = -2000 ;
 			slide = -3000 ;
 		}
-		void update_slide();
+		void update_slide(double px);
 	private:
 		double stone; // the x of stone
 		double slide; // 雪崩的 x 坐标
@@ -56,6 +56,7 @@ class PlayerModel : public PhysicsEntity{
 			// setOnCurve(true);
 			dizzy = false ;
 			Penguin_ = false ;
+			end = false ;
 		}
 		void update_game(SnowCurve *SC);
 		void jump(SnowCurve *SC);
@@ -68,6 +69,9 @@ class PlayerModel : public PhysicsEntity{
 
 		bool is_dizzy() const {
 			return dizzy ;
+		}
+		bool game_end() const {
+			return end ;
 		}
 
 	private:
@@ -95,6 +99,7 @@ class PlayerModel : public PhysicsEntity{
 		bool Penguin_ ;
 
 		int cycles;
+		bool end ;
 };
 
 #endif

@@ -7,11 +7,13 @@ const double Vec_lim_in_air = 6500 ;
 const double eps = 40.0 ;
 const double DizzyTime = 2.0 ;
 
-void SnowCurve::update_slide(){
+void SnowCurve::update_slide(double px){
 	double slide_vel = 500.0 ;
 	if(slide > 5000) slide_vel += 1000.0 ;
 	if(slide >15000) slide_vel += 1000.0 ;
 	if(slide >25000) slide_vel += 1000.0 ;
+	if(slide >45000) slide_vel += 2000.0 ;
+	if(slide > px - 2000) slide_vel -= 1000.0 ;
 
 	slide += slide_vel * deltaTime ;
 }
@@ -33,9 +35,11 @@ void PlayerModel::update_game(SnowCurve *SC){
 	// std::cerr << "Update_player : oncurve : " << isOnCurve() << std::endl ;
 	// std::cerr << "Velocity : " << this->getVelocity().x << " " << this->getVelocity().y << std::endl ;
 	// std::cerr << "Angle : " << this->getAngle().deg() << " " << this->getVelocity().y << std::endl ;
+	double slide = SC->get_slide();
+
 	double px = this->getPosition().x;
 	double sx = SC->get_stone();
-	
+
 	if(sx < px - offset){
 		SC->set_stone(px + offset + (rand()%(offset * 2)));
 		sx = SC->get_stone();
@@ -48,6 +52,11 @@ void PlayerModel::update_game(SnowCurve *SC){
 		this->get_dizzy();
 		this->setPosition(Vector(px,SC->evaluate(px)));
 	}
+
+	if(slide >= px && this->getPosition().y < SC->evaluate(px) + 40){
+		end = true ;
+	}
+
 	if(dizzy && dizzy_time.elapsed() > DizzyTime){
 		dizzy = false ;
 	}
@@ -179,4 +188,5 @@ void PlayerModel::reset(){
 	this->setOnCurve(true);
 	this->dizzy = false ;
 	this->Penguin_ = false ;
+	this->end = false ;
 }

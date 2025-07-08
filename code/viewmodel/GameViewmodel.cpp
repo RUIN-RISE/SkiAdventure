@@ -14,14 +14,18 @@ void GameViewModel::next_step(int turn)
 {
 	// std::cerr << "next_step" << std::endl;
 	if(GameStatus == 0) return ;
-	this->plm.update_game(&this->FullCurve);
-	this->pgm.update_penguin(&this->FullCurve,&this->plm);
-	this->FullCurve.update_slide();
+	if(GameStatus == 1){
+		this->plm.update_game(&this->FullCurve);
+		this->pgm.update_penguin(&this->FullCurve,&this->plm);		
+	}
+	this->FullCurve.update_slide(this->plm.getPosition().x);
+	if(this->plm.game_end())
+		GameStatus = 2; // 结束
 	fire(PROP_ID_MAP);
 }
 
 void GameViewModel::jump(){
-	if(GameStatus == 0) return ;
+	if(GameStatus != 1) return ;
 	this->plm.jump(&this->FullCurve);
 }
 
