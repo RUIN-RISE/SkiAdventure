@@ -29,8 +29,9 @@ void GameViewModel::jump(){
 	this->plm.jump(&this->FullCurve);
 }
 
-bool GameViewModel::start_game(){
+bool GameViewModel::start_game(int R){
 	if(GameStatus == 1) return false ;
+	if(GameStatus == 2 && R == 0) return false ;
 	GameStatus = 1;
 	this->plm.reset();
 	this->FullCurve.reset();

@@ -69,12 +69,13 @@ void MainWindow::timeout_cb(void* pv)
 int MainWindow::handle(int event) {
     switch (event) {
         case FL_KEYDOWN: {
-            // 检查按下的键是否是空格键
 			if(m_start_command){
-				if(m_start_command()){
+				//游戏结束时只有R键可以重开
+				if(m_start_command(Fl::event_key() == 'r')){
 					return 1 ;
 				}
 			}
+			// 检查按下的键是否是空格键
             if (Fl::event_key() == ' ') {
 				std::cerr << "Read a space" << std::endl ;
                 // 确保 ViewModel 已经被设置
