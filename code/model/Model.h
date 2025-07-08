@@ -50,7 +50,7 @@ class PlayerModel : public PhysicsEntity{
 			Vector(0,0),
 			Vector(1000,0),
 			Vector(0,-2000),
-			0,
+			Angle(-0.75), //与初始位置雪坡相切
 			true
 		){
 			// setOnCurve(true);
